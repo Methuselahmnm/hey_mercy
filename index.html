@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Mercy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css\style.css">
+</head>
+<body>
+
+        <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader">
+        <div class="heart-loader">
+            <div class="heart-piece-1"></div>
+            <div class="heart-piece-2"></div>
+            <div class="heart-piece-3"></div>
+            <div class="heart-piece-4"></div>
+        </div>
+        <div class="loading-text">Loading Special Moments...</div>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-heart"></i> To Mercy</a>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="nav-container" id="nav-container">
+            <div class="nav-section">
+                <span class="nav-section-title">Main</span>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#memories">Memories</a>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <span class="nav-section-title">Media</span>
+                <div class="nav-links">
+                    <a href="index.html#music">Our Songs</a>
+                    <a href="gallery.html">Gallery</a>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <span class="nav-section-title">Special</span>
+                <div class="nav-links">
+                    <a href="index.html#messages">Love Notes</a>
+                    <a href="index.html#future">Our Future</a>
+                </div>
+            </div>
+
+            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" 
+                target="_blank" 
+                class="spotify-link">
+                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/09/Spotify_Logo_CMYK_Green.png" 
+                        alt="Spotify Logo" 
+                        class="spotify-logo">
+                <span>Listen on Spotify</span>
+            </a>
+
+        </div>
+    </nav>
+    
+    <!-- Header Section -->
+    <section id="home" class="header">
+        <h1>Hey Mercy</h1>
+        <p>Every moment with you feels like a beautiful dream I never want to wake up from. You light up my world in ways I never thought possible.</p>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+    
+    <!-- Music Player Section -->
+    <section id="music">
+        <div class="music-player">
+            <div class="player-header">
+                <h2>Our Songs</h2>
+                <p>Music that reminds me of you</p>
+            </div>
+            <div class="player-controls">
+                <div class="song-info">
+                    <img src="gallery/cover1.jpg" onerror="this.src='gallery/cover1.jpg'" alt="Album Cover" id="album-cover">
+                    <h3 id="song-title">Pink + White</h3>
+                    <p id="song-artist">Frank Ocean</p>
+                </div>
+                <div class="progress-container">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="time-info">
+                    <span id="current-time">0:00</span>
+                    <span id="duration">3:30</span>
+                </div>
+                <div class="controls">
+                    <button class="control-btn" id="prev-btn"><i class="fas fa-step-backward"></i></button>
+                    <button class="control-btn play-btn" id="play-btn"><i class="fas fa-play" id="play-icon"></i></button>
+                    <button class="control-btn" id="next-btn"><i class="fas fa-step-forward"></i></button>
+                </div>
+            </div>
+            <div class="playlist">
+                <h3>Playlist</h3>
+                <div class="playlist-item active" data-src="media/Frank_Ocean_-_Pink___White(256k).mp3" data-title="PInk + White" data-artist="Frank Ocean" data-cover="https://source.unsplash.com/random/600x600/?love">
+                    <img src="gallery/blond.jpg" alt="Song Cover">
+                    <div class="playlist-item-info">
+                        <h4>Pink + White</h4>
+                        <p>Frank Ocean</p>
+                    </div>
+                </div>
+                <div class="playlist-item" data-src="media/Joe_Cocker_-_You_Are_So_Beautiful__Lyric_Video_(256k).mp3" data-title="You Are So Beautiful" data-artist="Joe Cocker" data-cover="https://source.unsplash.com/random/600x600/?romantic">
+                    <img src="gallery/joe cocker.jpg" alt="Song Cover">
+                    <div class="playlist-item-info">
+                        <h4>You Are So Beautiful</h4>
+                        <p>Joe Cocker</p>
+                    </div>
+                </div>
+                <div class="playlist-item" data-src="media/yung_kai_-_blue__Lyrics_(256k).mp3" data-title="Blue" data-artist="Yung Kai" data-cover="https://source.unsplash.com/random/600x600/?couple">
+                    <img src="gallery/blue.jpg" alt="Song Cover">
+                    <div class="playlist-item-info">
+                        <h4>Blue</h4>
+                        <p>Yung Kai</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Memories Section -->
+    <section id="memories" class="memories">
+        <h2>Beautiful Memories</h2>
+        <div class="memory-text">
+            <p>Every moment with you becomes a cherished memory. From our first meeting to all the little things in between, each memory is a treasure I hold close to my heart.</p>
+            <p>Your smile brightens my darkest days, your laugh is my favorite melody, and meeting you is the best thing to ever happen to me.</p>
+            <p>I look forward to creating countless more memories with you, growing together, and loving you more each day.</p>
+        </div>
+        <a href="gallery.html" class="gallery-link">View Our Gallery <i class="fas fa-arrow-right"></i></a>
+    </section>
+    
+    <!-- Love Notes Section -->
+    <section id="messages" class="messages">
+        <h2>Love Notes</h2>
+        <!-- Add your love messages here -->
+         <p>I love you more and more everyday,<br>
+             i love you when cold i love you when its hot,<br>
+             i love you when we fight i love you when we<br>
+              make up, i love you today, i love you more<br>
+               tomorrow and i'll love you even more in the<br>
+                future.</p>
+
+            <br> 
+            
+            <p>Theres nothing i want more than for you to be mine.</p>
+
+            <br>
+
+            <br>
+            
+            <p>I know im not the most romantic guy, i built this website<br>
+            show you how much i love and care for you.
+            <br></p>
+            
+            <br>
+
+            <p>Mercy Chiudzu Banda,<br>
+            
+            Will you Officially be my girlfriend.</p>
+    </section>
+    
+    <!-- Future Section -->
+    <section id="future" class="future">
+        <h2>Our Future</h2>
+        <!-- Add your future plans here -->
+
+        <p>Ive pictured a whole future with you,<br>
+        from our wedding day to our first child.<br>
+        I cant wait for us to go on my more<br>
+         adventures together.</p>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a"><i class="fab fa-spotify"></i></a>
+        </div>
+        <p>From Methuselah to <span class="heart">❤</span> Mercy</p>
+    </footer>
+
+    <script src="js\script.js"></script>
+    <script src="js\music-player.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Gallery | For Someone Special</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css\style.css">
+
+    <style>
+        /* Gallery Grid */
+        
+    </style>
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-heart"></i>To Mercy</a>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="nav-container" id="nav-container">
+            <div class="nav-section">
+                <span class="nav-section-title">Main</span>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#memories">Memories</a>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <span class="nav-section-title">Media</span>
+                <div class="nav-links">
+                    <a href="index.html#music">Our Songs</a>
+                    <a href="gallery.html">Gallery</a>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <span class="nav-section-title">Special</span>
+                <div class="nav-links">
+                    <a href="index.html#messages">Love Notes</a>
+                    <a href="index.html#future">Our Future</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Gallery Header -->
+    <section class="gallery-header">
+        <h1>Our Special Moments</h1>
+        <p>Every picture tells a story of our love and the beautiful memories we've created together.</p>
+    </section>
+    
+    <!-- Gallery Grid -->
+    <section class="gallery-container">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="gallery/dlila1.jpg" alt="Memory 1">
+                <div class="gallery-caption">Dlila Date night</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/Dlila.jpg" alt="Memory 2">
+                <div class="gallery-caption">Dlila Date night</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/mandahill.jpg" alt="Memory 3">
+                <div class="gallery-caption">Movie Night</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/park.jpg" alt="Memory 4">
+                <div class="gallery-caption">Exploring together</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/Vic 1.jpg" alt="Memory 5">
+                <div class="gallery-caption">Victoria's Wedding</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/Vic 2.jpg" alt="Memory 6">
+                <div class="gallery-caption">Victoria's Wedding</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/favorite.jpg" alt="Memory 7">
+                <div class="gallery-caption">My favorite</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/dem.jpg" alt="Memory 8">
+                <div class="gallery-caption">Eish</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/smile2.jpg" alt="Memory 9">
+                <div class="gallery-caption">Her smile</div>
+            </div>
+            <div class="gallery-item">
+                <img src="gallery/Glowing.jpg" alt="Memory 10">
+                <div class="gallery-caption">Beauty that knows no bounds</div>
+            </div>
+        </div>
+        
+        <div class="overlay" id="overlay">
+            <button class="close-btn" onclick="closeImage()">&times;</button>
+            <img class="expanded-img" id="expandedImg" src="" alt="">
+            <div class="expanded-caption" id="expandedCaption"></div>
+        </div>
+    
+            <!-- Expanded Image Overlay -->
+    <div class="overlay" id="overlay">
+        <button class="close-btn" onclick="closeImage()">&times;</button>
+        <img class="expanded-img" id="expandedImg" src="" alt="">
+        <div class="expanded-caption" id="expandedCaption"></div>
+    </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+
+            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a"></a><i class="fab fa-spotify"></i></a>
+        </div>
+        <p>From Methuselah to <i class="fas fa-heart" style="color: var(--accent-color);"></i> Mercy</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

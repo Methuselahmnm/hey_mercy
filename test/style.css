@@ -1,0 +1,102 @@
+/* Loading Screen Styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4b0082, #8a2be2, #da70d6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  
+  .loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .loader {
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+  }
+  
+  /* Heart Loader Animation */
+  .heart-loader {
+    position: relative;
+    width: 100px;
+    height: 90px;
+    margin: 0 auto 30px;
+    animation: pulse 1.5s ease infinite;
+  }
+  
+  .heart-piece-1, .heart-piece-2, .heart-piece-3, .heart-piece-4 {
+    position: absolute;
+    background-color: #ff69b4;
+    width: 50px;
+    height: 80px;
+    border-radius: 50px 50px 0 0;
+    transform-origin: bottom;
+  }
+  
+  .heart-piece-1 {
+    left: 50px;
+    transform: rotate(-45deg);
+  }
+  
+  .heart-piece-2 {
+    left: 0;
+    transform: rotate(45deg);
+  }
+  
+  .heart-piece-3 {
+    left: 50px;
+    transform: rotate(-45deg) scaleY(-1);
+    top: 22px;
+  }
+  
+  .heart-piece-4 {
+    left: 0;
+    transform: rotate(45deg) scaleY(-1);
+    top: 22px;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(0.95); }
+  }
+  
+  .loading-text {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    animation: textFade 2s ease infinite;
+  }
+  
+  @keyframes textFade {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  
+  .loading-progress {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to right, #ff69b4, #ffffff);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
