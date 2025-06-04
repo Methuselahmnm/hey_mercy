@@ -173,3 +173,20 @@ document.addEventListener('DOMContentLoaded', function() {
     //   }
     // }
   });
+
+ // Love notes functionality
+    const noteText = document.querySelector('.note-text');
+    const loveMessages = [
+        "Every moment with you feels like a beautiful dream I never want to wake up from.",
+        "Your smile is my favorite thing in the world. It lights up my darkest days.",
+        "I fall in love with you more and more each day, in ways I never thought possible.",
+        "You are the missing piece to my puzzle, the answer to all my questions.",
+        "My heart skips a beat every time I see you. You have that effect on me.",
+        "Loving you is the easiest and most natural thing I've ever done.",
+        "You make my world brighter just by being in it. I'm so grateful for you.",
+        "I never believed in soulmates until I met you. Now I can't imagine my life without you.",
+        "Your love is the greatest gift I've ever received. I cherish it every day.",
+        "When I'm with you, I feel like I'm home. You're my safe place.",
+        "You're not just my love, you're my best friend, my partner, and my everything.",
+        "I love the way you love me - completely, unconditionally, and without hesitation."
+    ];
