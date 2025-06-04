@@ -190,3 +190,192 @@ document.addEventListener('DOMContentLoaded', function() {
         "You're not just my love, you're my best friend, my partner, and my everything.",
         "I love the way you love me - completely, unconditionally, and without hesitation."
     ];
+
+     // AI generated love messages (simulated)
+    function generateAIMessage() {
+        const adjectives = ['beautiful', 'amazing', 'incredible', 'wonderful', 'stunning', 'breathtaking'];
+        const nouns = ['smile', 'eyes', 'heart', 'soul', 'laughter', 'presence'];
+        const verbs = ['brightens', 'illuminates', 'transforms', 'enchants', 'captivates', 'enchants'];
+        
+        const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+        const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+        const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
+        
+        return `Your ${randomAdjective} ${randomNoun} ${randomVerb} my world every single day. I'm so lucky to have you.`;
+    }
+    
+    // Combine predefined messages with AI generated ones
+    function getRandomMessage() {
+        // 70% chance for predefined, 30% for AI generated
+        return Math.random() < 0.7 ? 
+            loveMessages[Math.floor(Math.random() * loveMessages.length)] : 
+            generateAIMessage();
+    }
+    
+    function updateLoveNote() {
+        noteText.style.opacity = 0;
+        
+        setTimeout(() => {
+            noteText.textContent = getRandomMessage();
+            noteText.style.opacity = 1;
+        }, 500);
+    }
+    
+    // Start love notes rotation
+    updateLoveNote();
+    setInterval(updateLoveNote, 30000);
+    
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Animation on scroll
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('section');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementTop < windowHeight - 100) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    }
+    
+    // Set initial state for animation
+    document.querySelectorAll('section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Run once on load
+    
+    // Heart animation in notes section
+    function createFloatingHeart() {
+        const heartsContainer = document.querySelector('.hearts-animation');
+        const heart = document.createElement('div');
+        heart.className = 'heart floating';
+        
+        // Random size
+        const size = Math.random() * 20 + 10;
+        heart.style.width = `${size}px`;
+        heart.style.height = `${size}px`;
+        
+        // Random position
+        heart.style.left = `${Math.random() * 80 + 10}px`;
+        
+        // Random animation duration
+        const duration = Math.random() * 3 + 2;
+        heart.style.animation = `float ${duration}s infinite ease-in-out`;
+        
+        // Random delay
+        heart.style.animationDelay = `${Math.random() * 2}s`;
+        
+        // Random opacity
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        
+        heartsContainer.appendChild(heart);
+        
+        // Remove heart after animation completes
+        setTimeout(() => {
+            heart.remove();
+        }, duration * 1000);
+    }
+    
+    // Start love notes rotation
+    updateLoveNote();
+    setInterval(updateLoveNote, 30000);
+    
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Animation on scroll
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('section');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementTop < windowHeight - 100) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    }
+    
+    // Set initial state for animation
+    document.querySelectorAll('section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Run once on load
+    
+    // Heart animation in notes section
+    function createFloatingHeart() {
+        const heartsContainer = document.querySelector('.hearts-animation');
+        const heart = document.createElement('div');
+        heart.className = 'heart floating';
+        
+        // Random size
+        const size = Math.random() * 20 + 10;
+        heart.style.width = `${size}px`;
+        heart.style.height = `${size}px`;
+        
+        // Random position
+        heart.style.left = `${Math.random() * 80 + 10}px`;
+        
+        // Random animation duration
+        const duration = Math.random() * 3 + 2;
+        heart.style.animation = `float ${duration}s infinite ease-in-out`;
+        
+        // Random delay
+        heart.style.animationDelay = `${Math.random() * 2}s`;
+        
+        // Random opacity
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        
+        heartsContainer.appendChild(heart);
+        
+        // Remove heart after animation completes
+        setTimeout(() => {
+            heart.remove();
+        }, duration * 1000);
+    }
+    
+    // Create floating hearts periodically
+    setInterval(createFloatingHeart, 800);
