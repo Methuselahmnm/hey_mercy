@@ -379,3 +379,37 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Create floating hearts periodically
     setInterval(createFloatingHeart, 800);
+
+// Countdown Timer Functionality
+function updateCountdowns() {
+    const now = new Date();
+    
+    // Update each countdown timer
+    document.querySelectorAll('.countdown-timer').forEach((timer, index) => {
+        const targetDate = new Date(timer.dataset.date);
+        const diff = targetDate - now;
+        
+        if (diff <= 0) {
+            // If date has passed
+            document.getElementById(`days${index+1}`).textContent = '00';
+            document.getElementById(`hours${index+1}`).textContent = '00';
+            document.getElementById(`minutes${index+1}`).textContent = '00';
+            document.getElementById(`seconds${index+1}`).textContent = '00';
+            return;
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        document.getElementById(`days${index+1}`).textContent = days.toString().padStart(2, '0');
+        document.getElementById(`hours${index+1}`).textContent = hours.toString().padStart(2, '0');
+        document.getElementById(`minutes${index+1}`).textContent = minutes.toString().padStart(2, '0');
+        document.getElementById(`seconds${index+1}`).textContent = seconds.toString().padStart(2, '0');
+    });
+}
+
+// Initialize countdown and update every second
+updateCountdowns();
+setInterval(updateCountdowns, 1000);
