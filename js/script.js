@@ -1,5 +1,45 @@
 document.addEventListener('DOMContentLoaded', function() {
     // ======================
+    // Loading Screen
+    // ======================
+    const loadingScreen = document.getElementById('loading-screen');
+    const progressBar = document.getElementById('progress-bar');
+    const quotes = document.querySelectorAll('.quote');
+    const sparkles = document.querySelectorAll('.sparkle');
+    let currentQuote = 0;
+    
+    // Animate sparkles
+    if (sparkles.length > 0) {
+        sparkles.forEach((sparkle, index) => {
+            sparkle.style.animation = `sparkle ${2 + index * 0.3}s ease infinite ${index * 0.2}s`;
+        });
+    }
+    
+    // Rotate romantic quotes
+    if (quotes.length > 0) {
+        setInterval(() => {
+            quotes[currentQuote].classList.remove('active');
+            currentQuote = (currentQuote + 1) % quotes.length;
+            quotes[currentQuote].classList.add('active');
+        }, 3000);
+    }
+    
+    // Actual loading implementation
+    window.addEventListener('load', function() {
+        // Quickly fill progress bar when page is loaded
+        if (progressBar) {
+            progressBar.style.width = '100%';
+        }
+        
+        // Hide loading screen after short delay
+        setTimeout(() => {
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+            }
+        }, 500);
+    });
+
+    // ======================
     // Mobile Menu Toggle
     // ======================
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -80,27 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initial check
         handleScrollAnimation();
-    }
-
-    // ======================
-    // Loading Screen
-    // ======================
-    const loadingScreen = document.querySelector('.loading-screen');
-    const progressBar = document.querySelector('.progress-bar');
-    
-    if (loadingScreen && progressBar) {
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += Math.random() * 10;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-                setTimeout(() => {
-                    loadingScreen.classList.add('hidden');
-                }, 500);
-            }
-            progressBar.style.width = `${progress}%`;
-        }, 300);
     }
 
     // ======================
@@ -285,6 +304,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ======================
+    // Gallery Functionality
+    // ======================
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const overlay = document.getElementById('overlay');
+    const expandedImg = document.getElementById('expandedImg');
+    const expandedCaption = document.getElementById('expandedCaption');
+    
+    if (galleryItems.length > 0 && overlay && expandedImg && expandedCaption) {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                const caption = this.querySelector('.gallery-caption').textContent;
+                
+                expandedImg.src = imgSrc;
+                expandedCaption.textContent = caption;
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    }
+
+    // ======================
     // Helper Functions
     // ======================
     function generateAIMessage() {
@@ -357,36 +398,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Gallery functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const navContainer = document.getElementById('nav-container');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-        navContainer.classList.toggle('active');
-    });
-    
-    // Gallery image click handler
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const overlay = document.getElementById('overlay');
-    const expandedImg = document.getElementById('expandedImg');
-    const expandedCaption = document.getElementById('expandedCaption');
-    
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const imgSrc = this.querySelector('img').src;
-            const caption = this.querySelector('.gallery-caption').textContent;
-            
-            expandedImg.src = imgSrc;
-            expandedCaption.textContent = caption;
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-    });
-});
-
 function closeImage() {
-    document.getElementById('overlay').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const overlay = document.getElementById('overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }

@@ -451,7 +451,7 @@ section {
     object-fit: contain;
 }
 
-/* Loading Screen */
+/* Add this to your CSS */
 .loading-screen {
     position: fixed;
     top: 0;
@@ -517,6 +517,85 @@ section {
     top: 22px;
 }
 
+/* Add this CSS to replace your current loading screen styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4b0082, #8a2be2, #da70d6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+.double-heart-loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+}
+
+.heart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff69b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center center;
+    background-size: contain;
+    animation: heartbeat 1.5s ease infinite;
+}
+
+.inner-heart {
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    animation: heartbeat 1.5s ease infinite reverse;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+.sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: 0;
+}
+
+.s1 { top: 10%; left: 25%; }
+.s2 { top: 25%; left: 10%; }
+.s3 { top: 25%; right: 10%; }
+.s4 { top: 10%; right: 25%; }
+
+@keyframes heartbeat {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes sparkle {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
 .loading-text {
     color: white;
     font-size: 1.2rem;
@@ -534,6 +613,52 @@ section {
     overflow: hidden;
 }
 
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to right, #ff69b4, #ffffff);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.romantic-quotes {
+    margin-top: 30px;
+    height: 60px;
+    position: relative;
+    width: 100%;
+}
+
+.quote {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.quote.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animations */
+@keyframes textFade {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+@keyframes textFade {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
 .progress-bar {
     height: 100%;
     width: 0;
