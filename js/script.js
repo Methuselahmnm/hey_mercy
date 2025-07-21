@@ -1,201 +1,296 @@
-// Mobile menu toggle
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const navContainer = document.getElementById('nav-container');
+document.addEventListener('DOMContentLoaded', function() {
+    // ======================
+    // Mobile Menu Toggle
+    // ======================
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navContainer = document.getElementById('nav-container');
 
-if (mobileMenuBtn && navContainer) {
-    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    if (mobileMenuBtn && navContainer) {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
 
-    mobileMenuBtn.addEventListener('click', () => {
-        const isActive = navContainer.classList.toggle('active');
-        mobileMenuBtn.setAttribute('aria-expanded', isActive);
-        mobileMenuBtn.innerHTML = isActive ?
-            '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
+        mobileMenuBtn.addEventListener('click', () => {
+            const isActive = navContainer.classList.toggle('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isActive);
+            mobileMenuBtn.innerHTML = isActive ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
 
-    // Close menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navContainer.classList.contains('active')) {
-                navContainer.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navContainer.classList.contains('active')) {
+                    navContainer.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+    }
+
+    // ======================
+    // Smooth Scrolling
+    // ======================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });
-}
 
-// Smooth Scrolling for Navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#') {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
+    // ======================
+    // Scroll Animations
+    // ======================
+    const scrollElements = document.querySelectorAll('.music-player, [class*="animate"]');
+
+    if (scrollElements.length > 0) {
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend;
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('show');
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (!scrollTimeout) {
+                scrollTimeout = requestAnimationFrame(() => {
+                    handleScrollAnimation();
+                    scrollTimeout = null;
                 });
             }
-        }
-    });
-});
-
-// Show elements when scrolled to
-const scrollElements = document.querySelectorAll('.music-player, [class*="animate"]');
-
-if (scrollElements.length > 0) {
-    const elementInView = (el, dividend = 1) => {
-        const elementTop = el.getBoundingClientRect().top;
-        return elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend;
-    };
-
-    const displayScrollElement = (element) => {
-        element.classList.add('show');
-    };
-
-    const handleScrollAnimation = () => {
-        scrollElements.forEach((el) => {
-            if (elementInView(el, 1.25)) {
-                displayScrollElement(el);
-            }
         });
-    };
 
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        if (!scrollTimeout) {
-            scrollTimeout = requestAnimationFrame(() => {
-                handleScrollAnimation();
-                scrollTimeout = null;
-            });
-        }
-    });
-
-    // Initial check
-    handleScrollAnimation();
-}
-
-// Gallery hover effect (only on devices that support hover)
-if (window.matchMedia("(hover: hover)").matches) {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    galleryItems.forEach(item => {
-        const img = item.querySelector('img');
-        const caption = item.querySelector('.gallery-caption');
-        item.addEventListener('mouseenter', () => {
-            if (img) img.style.transform = 'scale(1.05)';
-            if (caption) caption.style.transform = 'translateY(0)';
-        });
-        item.addEventListener('mouseleave', () => {
-            if (img) img.style.transform = 'scale(1)';
-            if (caption) caption.style.transform = 'translateY(100%)';
-        });
-    });
-}
-
-// Detect portrait images
-document.querySelectorAll('.gallery-item img').forEach(img => {
-    img.onload = function () {
-        if (this.naturalHeight > this.naturalWidth) {
-            this.parentElement.classList.add('portrait');
-        }
-    };
-});
-
-// Expand image in overlay
-function expandImage(element) {
-    const overlay = document.getElementById('overlay');
-    const expandedImg = document.getElementById('expandedImg');
-    const expandedCaption = document.getElementById('expandedCaption');
-
-    if (!overlay || !expandedImg || !expandedCaption) return;
-
-    const imgSrc = element.querySelector('img')?.src;
-    const caption = element.querySelector('.gallery-caption')?.textContent;
-
-    if (imgSrc) expandedImg.src = imgSrc;
-    if (caption) expandedCaption.textContent = caption;
-
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeImage() {
-    const overlay = document.getElementById('overlay');
-    overlay.classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-// Close overlay when clicking outside image
-const overlay = document.getElementById('overlay');
-if (overlay) {
-    overlay.addEventListener('click', function (e) {
-        if (e.target === this || !e.target.closest('#expandedImg')) {
-            closeImage();
-        }
-    });
-}
-
-// Close overlay with ESC key
-document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-        closeImage();
+        // Initial check
+        handleScrollAnimation();
     }
-});
 
-// Loading Screen Functionality
-document.addEventListener('DOMContentLoaded', function() {
+    // ======================
+    // Loading Screen
+    // ======================
     const loadingScreen = document.querySelector('.loading-screen');
     const progressBar = document.querySelector('.progress-bar');
     
-    // Simulate progress (replace with actual loading logic)
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += Math.random() * 10;
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(interval);
-        setTimeout(() => {
-          loadingScreen.classList.add('hidden');
-        }, 500);
-      }
-      progressBar.style.width = `${progress}%`;
-    }, 300);
-  
-    // For actual implementation, you might want to use:
-    // window.addEventListener('load', function() {
-    //   loadingScreen.classList.add('hidden');
-    // });
-    
-    // Or for more accurate loading tracking:
-    // document.onreadystatechange = function() {
-    //   if (document.readyState === 'complete') {
-    //     loadingScreen.classList.add('hidden');
-    //   }
-    // }
-  });
+    if (loadingScreen && progressBar) {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 10;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 500);
+            }
+            progressBar.style.width = `${progress}%`;
+        }, 300);
+    }
 
- // Love notes functionality
-    const noteText = document.querySelector('.note-text');
-    const loveMessages = [
-        "Every moment with you feels like a beautiful dream I never want to wake up from.",
-        "Your smile is my favorite thing in the world. It lights up my darkest days.",
-        "I fall in love with you more and more each day, in ways I never thought possible.",
-        "You are the missing piece to my puzzle, the answer to all my questions.",
-        "My heart skips a beat every time I see you. You have that effect on me.",
-        "Loving you is the easiest and most natural thing I've ever done.",
-        "You make my world brighter just by being in it.",
-        "I never believed in soulmates until I met you. Now I can't imagine my life without you.",
-        "Your love is the greatest gift I've ever received. I cherish it every day.",
-        "When I'm with you, I feel like I'm home. You're my safe place.",
-        "You're not just my love, you're my best friend, my partner, and my everything.",
-        "I love the way you love me - completely, unconditionally, and without hesitation."
+    // ======================
+    // Countdown Timers
+    // ======================
+    function updateCountdowns() {
+        const now = new Date();
+        
+        document.querySelectorAll('.countdown-timer').forEach((timer, index) => {
+            const targetDateStr = timer.getAttribute('data-date');
+            if (!targetDateStr) return;
+            
+            const targetDate = new Date(targetDateStr);
+            const diff = targetDate - now;
+            
+            // Get elements for this timer
+            const daysEl = timer.querySelector('.time-unit:nth-child(1) .number');
+            const hoursEl = timer.querySelector('.time-unit:nth-child(2) .number');
+            const minutesEl = timer.querySelector('.time-unit:nth-child(3) .number');
+            const secondsEl = timer.querySelector('.time-unit:nth-child(4) .number');
+            
+            if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+            
+            if (diff <= 0) {
+                daysEl.textContent = '00';
+                hoursEl.textContent = '00';
+                minutesEl.textContent = '00';
+                secondsEl.textContent = '00';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            daysEl.textContent = days.toString().padStart(2, '0');
+            hoursEl.textContent = hours.toString().padStart(2, '0');
+            minutesEl.textContent = minutes.toString().padStart(2, '0');
+            secondsEl.textContent = seconds.toString().padStart(2, '0');
+        });
+    }
+
+    // Initialize and update countdowns
+    updateCountdowns();
+    const countdownInterval = setInterval(updateCountdowns, 1000);
+
+    // ======================
+    // Love Messages Carousel
+    // ======================
+    const messages = [
+        {
+            text: "Every moment with you feels like a beautiful dream I never want to wake up from.",
+            date: "Today",
+            preview: "My Dearest Mercy..."
+        },
+        {
+            text: "Your smile brightens my darkest days and gives me strength when I need it most.",
+            date: "Yesterday",
+            preview: "Your smile..."
+        },
+        {
+            text: "At night when I look at the stars, I think of how you shine brighter than all of them combined.",
+            date: "2 days ago",
+            preview: "At night..."
+        },
+        {
+            text: "Morning thoughts of you make getting out of bed the easiest part of my day.",
+            date: "3 days ago",
+            preview: "Morning thoughts..."
+        },
+        {
+            text: "Our song plays and suddenly the whole world disappears except for you and me.",
+            date: "Last week",
+            preview: "Our song..."
+        }
     ];
 
-     // AI generated love messages (simulated)
+    const featuredMessage = document.querySelector('.featured-message .message-text');
+    const messageDate = document.querySelector('.message-date');
+    const thumbnails = document.querySelectorAll('.message-thumbnail');
+    const carouselTrack = document.querySelector('.carousel-track');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const composeBtn = document.querySelector('.compose-btn');
+
+    if (featuredMessage && messageDate && thumbnails.length && carouselTrack) {
+        // Initialize messages
+        function updateFeaturedMessage(index) {
+            featuredMessage.textContent = messages[index].text;
+            messageDate.textContent = messages[index].date;
+            
+            // Update active thumbnail
+            document.querySelector('.message-thumbnail.active')?.classList.remove('active');
+            thumbnails[index].classList.add('active');
+        }
+
+        // Thumbnail click event
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', () => {
+                updateFeaturedMessage(index);
+            });
+        });
+
+        // Carousel navigation
+        let currentIndex = 0;
+
+        function scrollToThumbnail(index) {
+            const thumbnail = thumbnails[index];
+            if (thumbnail) {
+                thumbnail.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
+        }
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + messages.length) % messages.length;
+                updateFeaturedMessage(currentIndex);
+                scrollToThumbnail(currentIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % messages.length;
+                updateFeaturedMessage(currentIndex);
+                scrollToThumbnail(currentIndex);
+            });
+        }
+
+        // Compose new message
+        if (composeBtn) {
+            composeBtn.addEventListener('click', () => {
+                const newMessage = {
+                    text: generateAIMessage(),
+                    date: "Just now",
+                    preview: "New note..."
+                };
+                
+                messages.unshift(newMessage);
+                updateFeaturedMessage(0);
+                
+                // Create new thumbnail
+                const newThumbnail = document.createElement('div');
+                newThumbnail.className = 'message-thumbnail';
+                newThumbnail.setAttribute('data-index', '0');
+                newThumbnail.innerHTML = `
+                    <div class="thumbnail-content">
+                        <i class="fas fa-heart"></i>
+                        <p>${newMessage.preview}</p>
+                    </div>
+                `;
+                
+                // Update all data-index attributes
+                thumbnails.forEach((thumb, i) => {
+                    thumb.setAttribute('data-index', i+1);
+                });
+                
+                carouselTrack.prepend(newThumbnail);
+                newThumbnail.addEventListener('click', () => updateFeaturedMessage(0));
+                
+                // Scroll to new message
+                setTimeout(() => {
+                    scrollToThumbnail(0);
+                }, 100);
+                
+                // Show confetti effect
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                }
+            });
+        }
+
+        // Initialize first message
+        updateFeaturedMessage(0);
+    }
+
+    // ======================
+    // Helper Functions
+    // ======================
     function generateAIMessage() {
-        const adjectives = ['beautiful', 'amazing', 'incredible', 'wonderful', 'stunning', 'breathtaking'];
-        const nouns = ['smile', 'eyes', 'heart', 'soul', 'laughter', 'presence'];
-        const verbs = ['brightens', 'illuminates', 'transforms', 'enchants', 'captivates', 'enchants'];
+        const adjectives = ['beautiful', 'amazing', 'incredible', 'wonderful', 'stunning'];
+        const nouns = ['smile', 'eyes', 'heart', 'soul', 'laughter'];
+        const verbs = ['brightens', 'illuminates', 'transforms', 'enchants', 'captivates'];
         
         const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
         const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
@@ -203,213 +298,95 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return `Your ${randomAdjective} ${randomNoun} ${randomVerb} my world every single day. I'm so lucky to have you.`;
     }
-    
-    // Combine predefined messages with AI generated ones
-    function getRandomMessage() {
-        // 70% chance for predefined, 30% for AI generated
-        return Math.random() < 0.7 ? 
-            loveMessages[Math.floor(Math.random() * loveMessages.length)] : 
-            generateAIMessage();
-    }
-    
-    function updateLoveNote() {
-        noteText.style.opacity = 0;
-        
-        setTimeout(() => {
-            noteText.textContent = getRandomMessage();
-            noteText.style.opacity = 1;
-        }, 500);
-    }
-    
-    // Start love notes rotation
-    updateLoveNote();
-    setInterval(updateLoveNote, 30000);
-    
-    // Smooth scrolling for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Animation on scroll
-    function animateOnScroll() {
-        const elements = document.querySelectorAll('section');
-        
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight - 100) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
-    }
-    
-    // Set initial state for animation
-    document.querySelectorAll('section').forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
-    
-    window.addEventListener('scroll', animateOnScroll);
-    animateOnScroll(); // Run once on load
-    
-    // Heart animation in notes section
-    function createFloatingHeart() {
-        const heartsContainer = document.querySelector('.hearts-animation');
-        const heart = document.createElement('div');
-        heart.className = 'heart floating';
-        
-        // Random size
-        const size = Math.random() * 20 + 10;
-        heart.style.width = `${size}px`;
-        heart.style.height = `${size}px`;
-        
-        // Random position
-        heart.style.left = `${Math.random() * 80 + 10}px`;
-        
-        // Random animation duration
-        const duration = Math.random() * 3 + 2;
-        heart.style.animation = `float ${duration}s infinite ease-in-out`;
-        
-        // Random delay
-        heart.style.animationDelay = `${Math.random() * 2}s`;
-        
-        // Random opacity
-        heart.style.opacity = Math.random() * 0.5 + 0.3;
-        
-        heartsContainer.appendChild(heart);
-        
-        // Remove heart after animation completes
-        setTimeout(() => {
-            heart.remove();
-        }, duration * 1000);
-    }
-    
-    // Start love notes rotation
-    updateLoveNote();
-    setInterval(updateLoveNote, 30000);
-    
-    // Smooth scrolling for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Animation on scroll
-    function animateOnScroll() {
-        const elements = document.querySelectorAll('section');
-        
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight - 100) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
-    }
-    
-    // Set initial state for animation
-    document.querySelectorAll('section').forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
-    
-    window.addEventListener('scroll', animateOnScroll);
-    animateOnScroll(); // Run once on load
-    
-    // Heart animation in notes section
-    function createFloatingHeart() {
-        const heartsContainer = document.querySelector('.hearts-animation');
-        const heart = document.createElement('div');
-        heart.className = 'heart floating';
-        
-        // Random size
-        const size = Math.random() * 20 + 10;
-        heart.style.width = `${size}px`;
-        heart.style.height = `${size}px`;
-        
-        // Random position
-        heart.style.left = `${Math.random() * 80 + 10}px`;
-        
-        // Random animation duration
-        const duration = Math.random() * 3 + 2;
-        heart.style.animation = `float ${duration}s infinite ease-in-out`;
-        
-        // Random delay
-        heart.style.animationDelay = `${Math.random() * 2}s`;
-        
-        // Random opacity
-        heart.style.opacity = Math.random() * 0.5 + 0.3;
-        
-        heartsContainer.appendChild(heart);
-        
-        // Remove heart after animation completes
-        setTimeout(() => {
-            heart.remove();
-        }, duration * 1000);
-    }
-    
-    // Create floating hearts periodically
-    setInterval(createFloatingHeart, 800);
 
-// Countdown Timer Functionality
-function updateCountdowns() {
-    const now = new Date();
+    // ======================
+    // Heart Button Animation
+    // ======================
+    const heartButton = document.querySelector('.heart-button');
+    if (heartButton) {
+        heartButton.addEventListener('click', function() {
+            this.innerHTML = '<i class="fas fa-heart"></i> Yes! I Love You!';
+            this.style.background = 'linear-gradient(to right, #8a2be2, #da70d6)';
+            
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        });
+    }
+
+    // ======================
+    // Milestones Animation
+    // ======================
+    const milestones = document.querySelectorAll('.milestones-list li');
+    if (milestones.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    entry.target.style.opacity = '0';
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                    }, 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        milestones.forEach((milestone, index) => {
+            milestone.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(milestone);
+        });
+    }
+
+    // ======================
+    // Message Tile Interaction
+    // ======================
+    const messageTile = document.querySelector('.message-tile-featured');
+    if (messageTile) {
+        messageTile.addEventListener('click', function() {
+            this.classList.toggle('expanded');
+        });
+        
+        const hearts = messageTile.querySelectorAll('.tile-hearts i');
+        hearts.forEach((heart, index) => {
+            heart.style.animation = `heartPulse ${1 + index * 0.2}s infinite`;
+        });
+    }
+});
+
+// Gallery functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navContainer = document.getElementById('nav-container');
     
-    // Update each countdown timer
-    document.querySelectorAll('.countdown-timer').forEach((timer, index) => {
-        const targetDate = new Date(timer.dataset.date);
-        const diff = targetDate - now;
-        
-        if (diff <= 0) {
-            // If date has passed
-            document.getElementById(`days${index+1}`).textContent = '00';
-            document.getElementById(`hours${index+1}`).textContent = '00';
-            document.getElementById(`minutes${index+1}`).textContent = '00';
-            document.getElementById(`seconds${index+1}`).textContent = '00';
-            return;
-        }
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        document.getElementById(`days${index+1}`).textContent = days.toString().padStart(2, '0');
-        document.getElementById(`hours${index+1}`).textContent = hours.toString().padStart(2, '0');
-        document.getElementById(`minutes${index+1}`).textContent = minutes.toString().padStart(2, '0');
-        document.getElementById(`seconds${index+1}`).textContent = seconds.toString().padStart(2, '0');
+    mobileMenuBtn.addEventListener('click', function() {
+        navContainer.classList.toggle('active');
     });
+    
+    // Gallery image click handler
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const overlay = document.getElementById('overlay');
+    const expandedImg = document.getElementById('expandedImg');
+    const expandedCaption = document.getElementById('expandedCaption');
+    
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const imgSrc = this.querySelector('img').src;
+            const caption = this.querySelector('.gallery-caption').textContent;
+            
+            expandedImg.src = imgSrc;
+            expandedCaption.textContent = caption;
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+});
+
+function closeImage() {
+    document.getElementById('overlay').style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
-
-// Initialize countdown and update every second
-updateCountdowns();
-setInterval(updateCountdowns, 1000);

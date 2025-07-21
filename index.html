@@ -5,34 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hey Mercy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-        <!-- Loading Screen -->
+    <!-- Loading Screen -->
     <div class="loading-screen">
         <div class="loader">
-        <div class="heart-loader">
-            <div class="heart-piece-1"></div>
-            <div class="heart-piece-2"></div>
-            <div class="heart-piece-3"></div>
-            <div class="heart-piece-4"></div>
-        </div>
-        <div class="loading-text">Loading Special Moments...</div>
-        <div class="loading-progress">
-            <div class="progress-bar"></div>
-        </div>
+            <div class="heart-loader">
+                <div class="heart-piece-1"></div>
+                <div class="heart-piece-2"></div>
+                <div class="heart-piece-3"></div>
+                <div class="heart-piece-4"></div>
+            </div>
+            <div class="loading-text">Loading Special Moments...</div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
         </div>
     </div>
     
     <!-- Navigation -->
     <nav>
         <a href="index.html" class="logo"><i class="fas fa-heart"></i> To Mercy</a>
-        
         <button class="mobile-menu-btn" id="mobile-menu-btn">
             <i class="fas fa-bars"></i>
         </button>
-        
         <div class="nav-container" id="nav-container">
             <div class="nav-section">
                 <span class="nav-section-title">Main</span>
@@ -41,7 +39,6 @@
                     <a href="index.html#memories">Memories</a>
                 </div>
             </div>
-            
             <div class="nav-section">
                 <span class="nav-section-title">Media</span>
                 <div class="nav-links">
@@ -49,7 +46,6 @@
                     <a href="gallery.html">Gallery</a>
                 </div>
             </div>
-            
             <div class="nav-section">
                 <span class="nav-section-title">Special</span>
                 <div class="nav-links">
@@ -57,16 +53,10 @@
                     <a href="index.html#future">Our Future</a>
                 </div>
             </div>
-
-            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" 
-                target="_blank" 
-                class="spotify-link">
-                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/09/Spotify_Logo_CMYK_Green.png" 
-                        alt="Spotify Logo" 
-                        class="spotify-logo">
+            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" target="_blank" class="spotify-link">
+                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/09/Spotify_Logo_CMYK_Green.png" alt="Spotify Logo" class="spotify-logo">
                 <span>Listen on Spotify</span>
             </a>
-
         </div>
     </nav>
     
@@ -107,7 +97,7 @@
             </div>
             <div class="playlist">
                 <h3>Playlist</h3>
-                <div class="playlist-item active" data-src="media/Frank_Ocean_-_Pink___White(256k).mp3" data-title="PInk + White" data-artist="Frank Ocean" data-cover="https://source.unsplash.com/random/600x600/?love">
+                <div class="playlist-item active" data-src="media/Frank_Ocean_-_Pink___White(256k).mp3" data-title="Pink + White" data-artist="Frank Ocean" data-cover="https://source.unsplash.com/random/600x600/?love">
                     <img src="gallery/blond.jpg" alt="Song Cover">
                     <div class="playlist-item-info">
                         <h4>Pink + White</h4>
@@ -146,131 +136,286 @@
     <!-- Love Notes Section -->
     <section id="messages" class="messages">
         <h2>From Methuselah</h2>
-        <!-- Add your love messages here -->
-          <p>
-            My Dearest Mercy,<br>
-            
-            Let’s be real I could’ve just scribbled “I ❤️ U”<br> on this website and called it a day,<br> but where’s the fun in that? Instead, <br>I built you an entire website second site <br>because, let’s face it, my love for you <br>requires more storage space <br>than a Google data center.<br>
-            
-            Think of this as your personal, <br>no-spam, premium tier love hub. <br>The "Love Notes"<br> section? That’s just the VIP area <br>where I stash all the mushy,<br> ridiculous, and occasionally cheesy <br>thoughts I have about you.<br> (Warning: Side effects may include <br>uncontrollable smiling, spontaneous hugs<br>(Which i want everytime i see you)<br>, and the sudden <br>urge to kiss me lol.)<br>
-
-            Mercy, you’re the human equivalent of a <br>perfectly timed pun unexpectedly <br>delightful and impossible to resist.<br>You’re the WiFi to my dead signal,<br> the avocado to my toast, <br>the "Did you mean…?" <br>to my terrible spelling. <br>Life without you would be like a browser <br>with no internet technically functional, <br>but utterly pointless.<br>
-
-            So here’s your custom-built,<br> heart powered website. <br>May it crash as rarely as my love <br>for you does (read: never). <br>Refresh often I’ll be updating it with more <br>reasons why you’re stuck with me forever.<br>
-
-            <br>
-            Forever yours,<br>
-            <br>
-            Methuselah Isaac Mwaba<br>
-            <br>
-
-            P.S. If you ever doubt my love, just check the site’s uptime. <br>Spoiler: It’s 100%. Just like my devotion. 💻❤️</p>
-    </section>
-
-     <section id="notes" class="notes-section">
-            <h2>Love Notes for You</h2>
-            <div class="love-note-container">
-                <div class="love-note">
-                    <p class="note-text">Loading sweet messages...</p>
-                    <div class="hearts-animation">
-                        <div class="heart small"></div>
-                        <div class="heart medium"></div>
-                        <div class="heart large"></div>
+        <div class="message-tiles">
+            <div class="message-tile message-tile-featured">
+                <div class="tile-header">
+                    <i class="fas fa-heart"></i>
+                    <h3>From Methuselah</h3>
+                </div>
+                <div class="tile-content">
+                    <p>
+                        My Dearest Mercy,<br><br>
+                        Let's be real I could've just scribbled "I ❤️ U" on this website and called it a day, 
+                        but where's the fun in that? Instead, I built you an entire website because, 
+                        let's face it, my love for you requires more storage space than a Google data center.<br><br>
+                        
+                        Think of this as your personal, no-spam, premium tier love hub. 
+                        The "Love Notes" section? That's just the VIP area where I stash all the mushy, 
+                        ridiculous, and occasionally cheesy thoughts I have about you.<br><br>
+                        
+                        Mercy, you're the human equivalent of a perfectly timed pun - unexpectedly 
+                        delightful and impossible to resist. You're the WiFi to my dead signal, 
+                        the avocado to my toast, the "Did you mean...?" to my terrible spelling. 
+                        Life without you would be like a browser with no internet - technically functional, 
+                        but utterly pointless.<br><br>
+                        
+                        So here's your custom-built, heart-powered website. 
+                        May it crash as rarely as my love for you does (read: never). 
+                        Refresh often - I'll be updating it with more reasons why you're stuck with me forever.<br><br>
+                        
+                        Forever yours,<br>
+                        Methuselah Isaac Mwaba<br><br>
+                        
+                        P.S. If you ever doubt my love, just check the site's uptime. 
+                        Spoiler: It's 100%. Just like my devotion. 💻❤️
+                    </p>
+                </div>
+                <div class="tile-footer">
+                    <span class="tile-date">June 2025</span>
+                    <div class="tile-hearts">
+                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart"></i>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+
+    <!-- Love Notes Cards Section -->
+    <!-- Romantic Messages Section -->
+<section id="notes" class="romantic-messages">
+    <div class="section-header">
+        <h2>Love Letters to You</h2>
+        <div class="divider">
+            <div class="divider-line"></div>
+            <i class="fas fa-heart"></i>
+            <div class="divider-line"></div>
+        </div>
+        <p class="section-subtitle">Words from my heart to yours</p>
+    </div>
+
+    <div class="messages-container">
+        <!-- Main Featured Message -->
+        <div class="featured-message">
+            <div class="message-card active">
+                <div class="card-header">
+                    <i class="fas fa-quote-left"></i>
+                    <div class="message-meta">
+                        <span class="message-date">Today</span>
+                        <div class="message-hearts">
+                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p class="message-text">Every moment with you feels like a beautiful dream I never want to wake up from.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="signature">- Methuselah</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Carousel -->
+        <div class="message-carousel">
+            <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            
+            <div class="carousel-track">
+                <div class="message-thumbnail" data-index="0">
+                    <div class="thumbnail-content">
+                        <i class="fas fa-heart"></i>
+                        <p>My Dearest Mercy...</p>
+                    </div>
+                </div>
+                <div class="message-thumbnail" data-index="1">
+                    <div class="thumbnail-content">
+                        <i class="fas fa-star"></i>
+                        <p>Your smile...</p>
+                    </div>
+                </div>
+                <div class="message-thumbnail" data-index="2">
+                    <div class="thumbnail-content">
+                        <i class="fas fa-moon"></i>
+                        <p>At night...</p>
+                    </div>
+                </div>
+                <div class="message-thumbnail" data-index="3">
+                    <div class="thumbnail-content">
+                        <i class="fas fa-sun"></i>
+                        <p>Morning thoughts...</p>
+                    </div>
+                </div>
+                <div class="message-thumbnail" data-index="4">
+                    <div class="thumbnail-content">
+                        <i class="fas fa-music"></i>
+                        <p>Our song...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <!-- Compose New Message Button -->
+        <button class="compose-btn">
+            <i class="fas fa-plus"></i> New Love Note
+        </button>
+    </div>
+
+    <!-- Floating Hearts Decoration -->
+    <div class="floating-hearts">
+        <div class="heart heart-1"></div>
+        <div class="heart heart-2"></div>
+        <div class="heart heart-3"></div>
+        <div class="heart heart-4"></div>
+        <div class="heart heart-5"></div>
+    </div>
+</section>
     
     <!-- Future Section -->
-    <section id="future" class="future">
-        <h2>Our Future</h2>
-        <!-- Add your future plans here -->
-            <p>
-                Exeh i love you, <br>i want to spend every second <br> of everyday with you. <br>Nothing will bring me more<br>joy than to have you as my girlfriend. <br>What you say about it?
-            </p>
-
-        </p>
+    <section id="future" class="future-plans">
+        <h2>Our Future Together</h2>
+        <div class="future-tiles">
+            <div class="future-tile future-tile-main">
+                <div class="tile-header">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>My Vision For Us</h3>
+                </div>
+                <div class="tile-content">
+                    <p>
+                        Exeh I love you,<br><br>
+                        I want to spend every second of everyday with you. 
+                        Nothing will bring me more joy than to have you as my girlfriend.<br><br>
+                        
+                        I envision a future where we grow together, support each other's dreams,
+                        and create countless beautiful memories. A future filled with laughter,
+                        understanding, and unconditional love.<br><br>
+                        
+                        What do you say about it? Will you walk this path with me?
+                    </p>
+                </div>
+                <div class="tile-actions">
+                    <button class="heart-button">
+                        <i class="fas fa-heart"></i> Say Yes!
+                    </button>
+                </div>
+                <div class="tile-footer">
+                    <span class="tile-promise">Promise Date: <span class="highlight">July 2024</span></span>
+                    <div class="tile-sparkles">
+                        <i class="fas fa-sparkle"></i>
+                        <i class="fas fa-sparkle"></i>
+                        <i class="fas fa-sparkle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="future-tile future-tile-milestones">
+                <div class="tile-header">
+                    <i class="fas fa-calendar-heart"></i>
+                    <h3>Future Milestones</h3>
+                </div>
+                <div class="tile-content">
+                    <ul class="milestones-list">
+                        <li>
+                            <i class="fas fa-heart"></i>
+                            <span>Our first anniversary celebration</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-heart"></i>
+                            <span>Traveling to new places together</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-heart"></i>
+                            <span>Supporting each other's dreams</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-heart"></i>
+                            <span>Growing together every day</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tile-footer">
+                    <span class="tile-note">More to be added as we create them</span>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Countdown Section -->
-<section id="countdown" class="countdown">
-    <h2>Counting Down to Special Days</h2>
-    <p class="countdown-subtitle">Every day with you is special</p>
-    
-    <div class="countdown-container">
-        <!-- First Meeting -->
-        <div class="countdown-item">
-            <h3>First Time I Saw You</h3>
-            <div class="countdown-timer" data-date="2025-05-13">
-                <div class="time-unit">
-                    <span class="number" id="days1">00</span>
-                    <span class="label">Days</span>
+    <section id="countdown" class="countdown">
+        <h2>Counting Down to Special Days</h2>
+        <p class="countdown-subtitle">Every day with you is special</p>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <h3>First Time I Saw You</h3>
+                <div class="countdown-timer" data-date="2025-05-13">
+                    <div class="time-unit">
+                        <span class="number" id="days1">00</span>
+                        <span class="label">Days</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="hours1">00</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="minutes1">00</span>
+                        <span class="label">Minutes</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="seconds1">00</span>
+                        <span class="label">Seconds</span>
+                    </div>
                 </div>
-                <div class="time-unit">
-                    <span class="number" id="hours1">00</span>
-                    <span class="label">Hours</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="minutes1">00</span>
-                    <span class="label">Minutes</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="seconds1">00</span>
-                    <span class="label">Seconds</span>
-                </div>
+                <p class="countdown-date">May 13th</p>
             </div>
-            <p class="countdown-date">May 13th</p>
-        </div>
-        
-        <!-- Special Day -->
-        <div class="countdown-item">
-            <h3>Our Special Day</h3>
-            <div class="countdown-timer" data-date="2025-07-19">
-                <div class="time-unit">
-                    <span class="number" id="days2">00</span>
-                    <span class="label">Days</span>
+            <div class="countdown-item">
+                <h3>Our Special Day</h3>
+                <div class="countdown-timer" data-date="2025-07-19">
+                    <div class="time-unit">
+                        <span class="number" id="days2">00</span>
+                        <span class="label">Days</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="hours2">00</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="minutes2">00</span>
+                        <span class="label">Minutes</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="seconds2">00</span>
+                        <span class="label">Seconds</span>
+                    </div>
                 </div>
-                <div class="time-unit">
-                    <span class="number" id="hours2">00</span>
-                    <span class="label">Hours</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="minutes2">00</span>
-                    <span class="label">Minutes</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="seconds2">00</span>
-                    <span class="label">Seconds</span>
-                </div>
+                <p class="countdown-date">July 19th</p>
             </div>
-            <p class="countdown-date">July 19th</p>
-        </div>
-        
-        <!-- Birthday -->
-        <div class="countdown-item">
-            <h3>Mercy's Birthday</h3>
-            <div class="countdown-timer" data-date="2025-08-20">
-                <div class="time-unit">
-                    <span class="number" id="days3">00</span>
-                    <span class="label">Days</span>
+            <div class="countdown-item">
+                <h3>Mercy's Birthday</h3>
+                <div class="countdown-timer" data-date="2025-08-20">
+                    <div class="time-unit">
+                        <span class="number" id="days3">00</span>
+                        <span class="label">Days</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="hours3">00</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="minutes3">00</span>
+                        <span class="label">Minutes</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="seconds3">00</span>
+                        <span class="label">Seconds</span>
+                    </div>
                 </div>
-                <div class="time-unit">
-                    <span class="number" id="hours3">00</span>
-                    <span class="label">Hours</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="minutes3">00</span>
-                    <span class="label">Minutes</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="seconds3">00</span>
-                    <span class="label">Seconds</span>
-                </div>
+                <p class="countdown-date">August 20th</p>
             </div>
-            <p class="countdown-date">August 20th</p>
         </div>
-    </div>
-</section>
+    </section>
     
     <!-- Footer -->
     <footer>
@@ -282,5 +427,6 @@
 
     <script src="js/script.js"></script>
     <script src="js/music-player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </body>
 </html>
