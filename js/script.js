@@ -1,12 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // ======================
-    // Loading Screen
-    // ======================
+    // Initialize loading screen
+    initLoadingScreen();
+    
+    // Initialize mobile menu
+    initMobileMenu();
+    
+    // Initialize smooth scrolling
+    initSmoothScrolling();
+    
+    // Initialize music player
+    initMusicPlayer();
+    
+    // Initialize countdown timers
+    initCountdowns();
+    
+    // Initialize love messages carousel
+    initLoveMessages();
+    
+    // Initialize gallery functionality
+    initGallery();
+    
+    // Initialize heart button
+    initHeartButton();
+});
+
+function initLoadingScreen() {
     const loadingScreen = document.getElementById('loading-screen');
     const progressBar = document.getElementById('progress-bar');
     const quotes = document.querySelectorAll('.quote');
     const sparkles = document.querySelectorAll('.sparkle');
-    let currentQuote = 0;
+    
+    if (!loadingScreen) return;
     
     // Animate sparkles
     if (sparkles.length > 0) {
@@ -16,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Rotate romantic quotes
+    let currentQuote = 0;
     if (quotes.length > 0) {
         setInterval(() => {
             quotes[currentQuote].classList.remove('active');
@@ -24,56 +49,60 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
     
-    // Actual loading implementation
-    window.addEventListener('load', function() {
-        // Quickly fill progress bar when page is loaded
-        if (progressBar) {
-            progressBar.style.width = '100%';
+    // Simulate loading progress
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+        progress += Math.random() * 10;
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(progressInterval);
         }
-        
-        // Hide loading screen after short delay
+        if (progressBar) {
+            progressBar.style.width = `${progress}%`;
+        }
+    }, 200);
+    
+    // Hide loading screen when everything is loaded
+    window.addEventListener('load', function() {
         setTimeout(() => {
             if (loadingScreen) {
-                loadingScreen.classList.add('hidden');
+                loadingScreen.style.opacity = '0';
+                loadingScreen.style.visibility = 'hidden';
+                document.body.style.overflow = 'auto';
             }
         }, 500);
     });
+}
 
-    // ======================
-    // Mobile Menu Toggle
-    // ======================
+function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const navContainer = document.getElementById('nav-container');
-
-    if (mobileMenuBtn && navContainer) {
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            const isActive = navContainer.classList.toggle('active');
-            mobileMenuBtn.setAttribute('aria-expanded', isActive);
-            mobileMenuBtn.innerHTML = isActive ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    
+    if (!mobileMenuBtn || !navContainer) return;
+    
+    mobileMenuBtn.addEventListener('click', function() {
+        const isActive = navContainer.classList.toggle('active');
+        this.setAttribute('aria-expanded', isActive);
+        this.innerHTML = isActive ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (navContainer.classList.contains('active')) {
+                navContainer.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
         });
+    });
+}
 
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navContainer.classList.contains('active')) {
-                    navContainer.classList.remove('active');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
-        });
-    }
-
-    // ======================
-    // Smooth Scrolling
-    // ======================
+function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
-            if (href !== '#') {
+            if (href !== '#' && href !== '') {
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
@@ -84,47 +113,169 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+}
 
-    // ======================
-    // Scroll Animations
-    // ======================
-    const scrollElements = document.querySelectorAll('.music-player, [class*="animate"]');
-
-    if (scrollElements.length > 0) {
-        const elementInView = (el, dividend = 1) => {
-            const elementTop = el.getBoundingClientRect().top;
-            return elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend;
-        };
-
-        const displayScrollElement = (element) => {
-            element.classList.add('show');
-        };
-
-        const handleScrollAnimation = () => {
-            scrollElements.forEach((el) => {
-                if (elementInView(el, 1.25)) {
-                    displayScrollElement(el);
-                }
-            });
-        };
-
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            if (!scrollTimeout) {
-                scrollTimeout = requestAnimationFrame(() => {
-                    handleScrollAnimation();
-                    scrollTimeout = null;
-                });
-            }
-        });
-
-        // Initial check
-        handleScrollAnimation();
+function initMusicPlayer() {
+    const musicPlayer = document.querySelector('.music-player');
+    if (!musicPlayer) return;
+    
+    const audio = new Audio();
+    let currentSong = 0;
+    let isPlaying = false;
+    
+    const songs = [
+        {
+            src: "media/Frank_Ocean_-_Pink___White(256k).mp3",
+            title: "Pink + White",
+            artist: "Frank Ocean",
+            cover: "gallery/blond.jpg"
+        },
+        {
+            src: "media/Joe_Cocker_-_You_Are_So_Beautiful__Lyric_Video_(256k).mp3",
+            title: "You Are So Beautiful",
+            artist: "Joe Cocker",
+            cover: "gallery/joe cocker.jpg"
+        },
+        {
+            src: "media/yung_kai_-_blue__Lyrics_(256k).mp3",
+            title: "Blue",
+            artist: "Yung Kai",
+            cover: "gallery/blue.jpg"
+        }
+    ];
+    
+    const albumCover = document.getElementById('album-cover');
+    const songTitle = document.getElementById('song-title');
+    const songArtist = document.getElementById('song-artist');
+    const progress = document.getElementById('progress');
+    const currentTimeEl = document.getElementById('current-time');
+    const durationEl = document.getElementById('duration');
+    const playBtn = document.getElementById('play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const playlistItems = document.querySelectorAll('.playlist-item');
+    
+    // Load song
+    function loadSong(songIndex) {
+        const song = songs[songIndex];
+        audio.src = song.src;
+        songTitle.textContent = song.title;
+        songArtist.textContent = song.artist;
+        albumCover.src = song.cover;
+        
+        // Update active playlist item
+        playlistItems.forEach(item => item.classList.remove('active'));
+        playlistItems[songIndex].classList.add('active');
     }
+    
+    // Play song
+    function playSong() {
+        isPlaying = true;
+        playIcon.classList.replace('fa-play', 'fa-pause');
+        audio.play();
+        albumCover.style.animationPlayState = 'running';
+    }
+    
+    // Pause song
+    function pauseSong() {
+        isPlaying = false;
+        playIcon.classList.replace('fa-pause', 'fa-play');
+        audio.pause();
+        albumCover.style.animationPlayState = 'paused';
+    }
+    
+    // Update progress bar
+    function updateProgress(e) {
+        if (isPlaying) {
+            const { duration, currentTime } = e.srcElement;
+            const progressPercent = (currentTime / duration) * 100;
+            progress.style.width = `${progressPercent}%`;
+            
+            // Calculate display for duration
+            const durationMinutes = Math.floor(duration / 60);
+            let durationSeconds = Math.floor(duration % 60);
+            if (durationSeconds < 10) {
+                durationSeconds = `0${durationSeconds}`;
+            }
+            
+            // Calculate display for current time
+            const currentMinutes = Math.floor(currentTime / 60);
+            let currentSeconds = Math.floor(currentTime % 60);
+            if (currentSeconds < 10) {
+                currentSeconds = `0${currentSeconds}`;
+            }
+            
+            // Update time display
+            if (durationSeconds) {
+                durationEl.textContent = `${durationMinutes}:${durationSeconds}`;
+            }
+            currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`;
+        }
+    }
+    
+    // Set progress bar
+    function setProgress(e) {
+        const width = this.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audio.duration;
+        audio.currentTime = (clickX / width) * duration;
+    }
+    
+    // Next song
+    function nextSong() {
+        currentSong++;
+        if (currentSong > songs.length - 1) {
+            currentSong = 0;
+        }
+        loadSong(currentSong);
+        if (isPlaying) {
+            playSong();
+        }
+    }
+    
+    // Previous song
+    function prevSong() {
+        currentSong--;
+        if (currentSong < 0) {
+            currentSong = songs.length - 1;
+        }
+        loadSong(currentSong);
+        if (isPlaying) {
+            playSong();
+        }
+    }
+    
+    // Event listeners
+    playBtn.addEventListener('click', () => {
+        isPlaying ? pauseSong() : playSong();
+    });
+    
+    prevBtn.addEventListener('click', prevSong);
+    nextBtn.addEventListener('click', nextSong);
+    
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('ended', nextSong);
+    
+    progress.parentElement.addEventListener('click', setProgress);
+    
+    // Click on playlist item
+    playlistItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            currentSong = index;
+            loadSong(currentSong);
+            playSong();
+        });
+    });
+    
+    // Show music player
+    musicPlayer.classList.add('show');
+    
+    // Load first song
+    loadSong(0);
+}
 
-    // ======================
-    // Countdown Timers
-    // ======================
+function initCountdowns() {
     function updateCountdowns() {
         const now = new Date();
         
@@ -165,11 +316,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize and update countdowns
     updateCountdowns();
-    const countdownInterval = setInterval(updateCountdowns, 1000);
+    setInterval(updateCountdowns, 1000);
+}
 
-    // ======================
-    // Love Messages Carousel
-    // ======================
+function initLoveMessages() {
+    const featuredMessage = document.querySelector('.featured-message .message-text');
+    const messageDate = document.querySelector('.message-date');
+    const thumbnails = document.querySelectorAll('.message-thumbnail');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const composeBtn = document.querySelector('.compose-btn');
+    
+    if (!featuredMessage || !messageDate || thumbnails.length === 0) return;
+    
     const messages = [
         {
             text: "Every moment with you feels like a beautiful dream I never want to wake up from.",
@@ -197,206 +356,120 @@ document.addEventListener('DOMContentLoaded', function() {
             preview: "Our song..."
         }
     ];
-
-    const featuredMessage = document.querySelector('.featured-message .message-text');
-    const messageDate = document.querySelector('.message-date');
-    const thumbnails = document.querySelectorAll('.message-thumbnail');
-    const carouselTrack = document.querySelector('.carousel-track');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    const composeBtn = document.querySelector('.compose-btn');
-
-    if (featuredMessage && messageDate && thumbnails.length && carouselTrack) {
-        // Initialize messages
-        function updateFeaturedMessage(index) {
-            featuredMessage.textContent = messages[index].text;
-            messageDate.textContent = messages[index].date;
-            
-            // Update active thumbnail
-            document.querySelector('.message-thumbnail.active')?.classList.remove('active');
-            thumbnails[index].classList.add('active');
-        }
-
-        // Thumbnail click event
-        thumbnails.forEach((thumbnail, index) => {
-            thumbnail.addEventListener('click', () => {
-                updateFeaturedMessage(index);
-            });
-        });
-
-        // Carousel navigation
-        let currentIndex = 0;
-
-        function scrollToThumbnail(index) {
-            const thumbnail = thumbnails[index];
-            if (thumbnail) {
-                thumbnail.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest',
-                    inline: 'center'
-                });
-            }
-        }
-
-        if (prevBtn && nextBtn) {
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + messages.length) % messages.length;
-                updateFeaturedMessage(currentIndex);
-                scrollToThumbnail(currentIndex);
-            });
-
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % messages.length;
-                updateFeaturedMessage(currentIndex);
-                scrollToThumbnail(currentIndex);
-            });
-        }
-
-        // Compose new message
-        if (composeBtn) {
-            composeBtn.addEventListener('click', () => {
-                const newMessage = {
-                    text: generateAIMessage(),
-                    date: "Just now",
-                    preview: "New note..."
-                };
-                
-                messages.unshift(newMessage);
-                updateFeaturedMessage(0);
-                
-                // Create new thumbnail
-                const newThumbnail = document.createElement('div');
-                newThumbnail.className = 'message-thumbnail';
-                newThumbnail.setAttribute('data-index', '0');
-                newThumbnail.innerHTML = `
-                    <div class="thumbnail-content">
-                        <i class="fas fa-heart"></i>
-                        <p>${newMessage.preview}</p>
-                    </div>
-                `;
-                
-                // Update all data-index attributes
-                thumbnails.forEach((thumb, i) => {
-                    thumb.setAttribute('data-index', i+1);
-                });
-                
-                carouselTrack.prepend(newThumbnail);
-                newThumbnail.addEventListener('click', () => updateFeaturedMessage(0));
-                
-                // Scroll to new message
-                setTimeout(() => {
-                    scrollToThumbnail(0);
-                }, 100);
-                
-                // Show confetti effect
-                if (typeof confetti === 'function') {
-                    confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: 0.6 }
-                    });
-                }
-            });
-        }
-
-        // Initialize first message
-        updateFeaturedMessage(0);
-    }
-
-    // ======================
-    // Gallery Functionality
-    // ======================
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const overlay = document.getElementById('overlay');
-    const expandedImg = document.getElementById('expandedImg');
-    const expandedCaption = document.getElementById('expandedCaption');
     
-    if (galleryItems.length > 0 && overlay && expandedImg && expandedCaption) {
-        galleryItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const imgSrc = this.querySelector('img').src;
-                const caption = this.querySelector('.gallery-caption').textContent;
-                
-                expandedImg.src = imgSrc;
-                expandedCaption.textContent = caption;
-                overlay.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
+    let currentIndex = 0;
+    
+    // Update featured message
+    function updateFeaturedMessage(index) {
+        featuredMessage.textContent = messages[index].text;
+        messageDate.textContent = messages[index].date;
+        
+        // Update active thumbnail
+        document.querySelector('.message-thumbnail.active')?.classList.remove('active');
+        thumbnails[index].classList.add('active');
+    }
+    
+    // Thumbnail click event
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener('click', () => {
+            currentIndex = index;
+            updateFeaturedMessage(currentIndex);
+        });
+    });
+    
+    // Carousel navigation
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + messages.length) % messages.length;
+            updateFeaturedMessage(currentIndex);
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % messages.length;
+            updateFeaturedMessage(currentIndex);
         });
     }
-
-    // ======================
-    // Helper Functions
-    // ======================
-    function generateAIMessage() {
-        const adjectives = ['beautiful', 'amazing', 'incredible', 'wonderful', 'stunning'];
-        const nouns = ['smile', 'eyes', 'heart', 'soul', 'laughter'];
-        const verbs = ['brightens', 'illuminates', 'transforms', 'enchants', 'captivates'];
-        
-        const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
-        const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
-        const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
-        
-        return `Your ${randomAdjective} ${randomNoun} ${randomVerb} my world every single day. I'm so lucky to have you.`;
-    }
-
-    // ======================
-    // Heart Button Animation
-    // ======================
-    const heartButton = document.querySelector('.heart-button');
-    if (heartButton) {
-        heartButton.addEventListener('click', function() {
-            this.innerHTML = '<i class="fas fa-heart"></i> Yes! I Love You!';
-            this.style.background = 'linear-gradient(to right, #8a2be2, #da70d6)';
+    
+    // Compose new message
+    if (composeBtn) {
+        composeBtn.addEventListener('click', () => {
+            const newMessage = {
+                text: generateAIMessage(),
+                date: "Just now",
+                preview: "New note..."
+            };
             
+            messages.unshift(newMessage);
+            currentIndex = 0;
+            updateFeaturedMessage(currentIndex);
+            
+            // Show confetti effect
             if (typeof confetti === 'function') {
                 confetti({
-                    particleCount: 150,
+                    particleCount: 100,
                     spread: 70,
                     origin: { y: 0.6 }
                 });
             }
         });
     }
+    
+    // Initialize first message
+    updateFeaturedMessage(currentIndex);
+}
 
-    // ======================
-    // Milestones Animation
-    // ======================
-    const milestones = document.querySelectorAll('.milestones-list li');
-    if (milestones.length > 0) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-                    entry.target.style.opacity = '0';
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                    }, 100);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        milestones.forEach((milestone, index) => {
-            milestone.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(milestone);
+function initGallery() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const overlay = document.getElementById('overlay');
+    const expandedImg = document.getElementById('expandedImg');
+    const expandedCaption = document.getElementById('expandedCaption');
+    
+    if (!galleryItems.length || !overlay || !expandedImg || !expandedCaption) return;
+    
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            const caption = this.querySelector('.gallery-caption');
+            
+            if (img && caption) {
+                expandedImg.src = img.src;
+                expandedCaption.textContent = caption.textContent;
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
         });
-    }
+    });
+}
 
-    // ======================
-    // Message Tile Interaction
-    // ======================
-    const messageTile = document.querySelector('.message-tile-featured');
-    if (messageTile) {
-        messageTile.addEventListener('click', function() {
-            this.classList.toggle('expanded');
-        });
+function initHeartButton() {
+    const heartButton = document.querySelector('.heart-button');
+    if (!heartButton) return;
+    
+    heartButton.addEventListener('click', function() {
+        this.innerHTML = '<i class="fas fa-heart"></i> Yes! I Love You!';
+        this.style.background = 'linear-gradient(to right, #8a2be2, #da70d6)';
         
-        const hearts = messageTile.querySelectorAll('.tile-hearts i');
-        hearts.forEach((heart, index) => {
-            heart.style.animation = `heartPulse ${1 + index * 0.2}s infinite`;
-        });
-    }
-});
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    });
+}
+
+function generateAIMessage() {
+    const adjectives = ['beautiful', 'amazing', 'incredible', 'wonderful', 'stunning'];
+    const nouns = ['smile', 'eyes', 'heart', 'soul', 'laughter'];
+    const verbs = ['brightens', 'illuminates', 'transforms', 'enchants', 'captivates'];
+    
+    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+    const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
+    
+    return `Your ${randomAdjective} ${randomNoun} ${randomVerb} my world every single day. I'm so lucky to have you.`;
+}
 
 function closeImage() {
     const overlay = document.getElementById('overlay');

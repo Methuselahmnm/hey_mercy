@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Hey Mercy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
@@ -10,30 +10,28 @@
 </head>
 <body>
     <!-- Loading Screen -->
-    <!-- Add this to your HTML (right after the opening <body> tag) -->
-<!-- Replace your current loading screen HTML with this -->
-<div class="loading-screen" id="loading-screen">
-    <div class="loader">
-        <div class="double-heart-loader">
-            <div class="heart outer-heart"></div>
-            <div class="heart inner-heart"></div>
-            <div class="sparkle s1"></div>
-            <div class="sparkle s2"></div>
-            <div class="sparkle s3"></div>
-            <div class="sparkle s4"></div>
-        </div>
-        <div class="loading-text">Loading our love story...</div>
-        <div class="loading-progress">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        <div class="romantic-quotes">
-            <div class="quote active">"You had me at hello"</div>
-            <div class="quote">"I love you more than yesterday"</div>
-            <div class="quote">"Every love story is beautiful"</div>
-            <div class="quote">"But ours is my favorite"</div>
+    <div class="loading-screen" id="loading-screen">
+        <div class="loader">
+            <div class="double-heart-loader">
+                <div class="heart outer-heart"></div>
+                <div class="heart inner-heart"></div>
+                <div class="sparkle s1"></div>
+                <div class="sparkle s2"></div>
+                <div class="sparkle s3"></div>
+                <div class="sparkle s4"></div>
+            </div>
+            <div class="loading-text">Loading our love story...</div>
+            <div class="loading-progress">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="romantic-quotes">
+                <div class="quote active">"You had me at hello"</div>
+                <div class="quote">"I love you more than yesterday"</div>
+                <div class="quote">"Every love story is beautiful"</div>
+                <div class="quote">"But ours is my favorite"</div>
+            </div>
         </div>
     </div>
-</div>
     
     <!-- Navigation -->
     <nav>
@@ -52,7 +50,7 @@
             <div class="nav-section">
                 <span class="nav-section-title">Media</span>
                 <div class="nav-links">
-                    <a href="index.html#music">Some Songs for You</a>
+                    <a href="index.html#music">Our Songs</a>
                     <a href="gallery.html">Gallery</a>
                 </div>
             </div>
@@ -107,21 +105,21 @@
             </div>
             <div class="playlist">
                 <h3>Playlist</h3>
-                <div class="playlist-item active" data-src="media/Frank_Ocean_-_Pink___White(256k).mp3" data-title="Pink + White" data-artist="Frank Ocean" data-cover="https://source.unsplash.com/random/600x600/?love">
+                <div class="playlist-item active" data-src="media/Frank_Ocean_-_Pink___White(256k).mp3" data-title="Pink + White" data-artist="Frank Ocean" data-cover="gallery/blond.jpg">
                     <img src="gallery/blond.jpg" alt="Song Cover">
                     <div class="playlist-item-info">
                         <h4>Pink + White</h4>
                         <p>Frank Ocean</p>
                     </div>
                 </div>
-                <div class="playlist-item" data-src="media/Joe_Cocker_-_You_Are_So_Beautiful__Lyric_Video_(256k).mp3" data-title="You Are So Beautiful" data-artist="Joe Cocker" data-cover="https://source.unsplash.com/random/600x600/?romantic">
+                <div class="playlist-item" data-src="media/Joe_Cocker_-_You_Are_So_Beautiful__Lyric_Video_(256k).mp3" data-title="You Are So Beautiful" data-artist="Joe Cocker" data-cover="gallery/joe cocker.jpg">
                     <img src="gallery/joe cocker.jpg" alt="Song Cover">
                     <div class="playlist-item-info">
                         <h4>You Are So Beautiful</h4>
                         <p>Joe Cocker</p>
                     </div>
                 </div>
-                <div class="playlist-item" data-src="media/yung_kai_-_blue__Lyrics_(256k).mp3" data-title="Blue" data-artist="Yung Kai" data-cover="https://source.unsplash.com/random/600x600/?couple">
+                <div class="playlist-item" data-src="media/yung_kai_-_blue__Lyrics_(256k).mp3" data-title="Blue" data-artist="Yung Kai" data-cover="gallery/blue.jpg">
                     <img src="gallery/blue.jpg" alt="Song Cover">
                     <div class="playlist-item-info">
                         <h4>Blue</h4>
@@ -192,98 +190,97 @@
         </div>
     </section>
 
-    <!-- Love Notes Cards Section -->
     <!-- Romantic Messages Section -->
-<section id="notes" class="romantic-messages">
-    <div class="section-header">
-        <h2>Love Letters to You</h2>
-        <div class="divider">
-            <div class="divider-line"></div>
-            <i class="fas fa-heart"></i>
-            <div class="divider-line"></div>
+    <section id="notes" class="romantic-messages">
+        <div class="section-header">
+            <h2>Love Letters to You</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <i class="fas fa-heart"></i>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">Words from my heart to yours</p>
         </div>
-        <p class="section-subtitle">Words from my heart to yours</p>
-    </div>
 
-    <div class="messages-container">
-        <!-- Main Featured Message -->
-        <div class="featured-message">
-            <div class="message-card active">
-                <div class="card-header">
-                    <i class="fas fa-quote-left"></i>
-                    <div class="message-meta">
-                        <span class="message-date">Today</span>
-                        <div class="message-hearts">
+        <div class="messages-container">
+            <!-- Main Featured Message -->
+            <div class="featured-message">
+                <div class="message-card active">
+                    <div class="card-header">
+                        <i class="fas fa-quote-left"></i>
+                        <div class="message-meta">
+                            <span class="message-date">Today</span>
+                            <div class="message-hearts">
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="message-text">Every moment with you feels like a beautiful dream I never want to wake up from.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="signature">- Methuselah</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Carousel -->
+            <div class="message-carousel">
+                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="carousel-track">
+                    <div class="message-thumbnail" data-index="0">
+                        <div class="thumbnail-content">
                             <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
+                            <p>My Dearest Mercy...</p>
+                        </div>
+                    </div>
+                    <div class="message-thumbnail" data-index="1">
+                        <div class="thumbnail-content">
+                            <i class="fas fa-star"></i>
+                            <p>Your smile...</p>
+                        </div>
+                    </div>
+                    <div class="message-thumbnail" data-index="2">
+                        <div class="thumbnail-content">
+                            <i class="fas fa-moon"></i>
+                            <p>At night...</p>
+                        </div>
+                    </div>
+                    <div class="message-thumbnail" data-index="3">
+                        <div class="thumbnail-content">
+                            <i class="fas fa-sun"></i>
+                            <p>Morning thoughts...</p>
+                        </div>
+                    </div>
+                    <div class="message-thumbnail" data-index="4">
+                        <div class="thumbnail-content">
+                            <i class="fas fa-music"></i>
+                            <p>Our song...</p>
                         </div>
                     </div>
                 </div>
-                <div class="card-content">
-                    <p class="message-text">Every moment with you feels like a beautiful dream I never want to wake up from.</p>
-                </div>
-                <div class="card-footer">
-                    <span class="signature">- Methuselah</span>
-                </div>
+                
+                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
+
+            <!-- Compose New Message Button -->
+            <button class="compose-btn">
+                <i class="fas fa-plus"></i> New Love Note
+            </button>
         </div>
 
-        <!-- Message Carousel -->
-        <div class="message-carousel">
-            <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-            
-            <div class="carousel-track">
-                <div class="message-thumbnail" data-index="0">
-                    <div class="thumbnail-content">
-                        <i class="fas fa-heart"></i>
-                        <p>My Dearest Mercy...</p>
-                    </div>
-                </div>
-                <div class="message-thumbnail" data-index="1">
-                    <div class="thumbnail-content">
-                        <i class="fas fa-star"></i>
-                        <p>Your smile...</p>
-                    </div>
-                </div>
-                <div class="message-thumbnail" data-index="2">
-                    <div class="thumbnail-content">
-                        <i class="fas fa-moon"></i>
-                        <p>At night...</p>
-                    </div>
-                </div>
-                <div class="message-thumbnail" data-index="3">
-                    <div class="thumbnail-content">
-                        <i class="fas fa-sun"></i>
-                        <p>Morning thoughts...</p>
-                    </div>
-                </div>
-                <div class="message-thumbnail" data-index="4">
-                    <div class="thumbnail-content">
-                        <i class="fas fa-music"></i>
-                        <p>Our song...</p>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+        <!-- Floating Hearts Decoration -->
+        <div class="floating-hearts">
+            <div class="heart heart-1"></div>
+            <div class="heart heart-2"></div>
+            <div class="heart heart-3"></div>
+            <div class="heart heart-4"></div>
+            <div class="heart heart-5"></div>
         </div>
-
-        <!-- Compose New Message Button -->
-        <button class="compose-btn">
-            <i class="fas fa-plus"></i> New Love Note
-        </button>
-    </div>
-
-    <!-- Floating Hearts Decoration -->
-    <div class="floating-hearts">
-        <div class="heart heart-1"></div>
-        <div class="heart heart-2"></div>
-        <div class="heart heart-3"></div>
-        <div class="heart heart-4"></div>
-        <div class="heart heart-5"></div>
-    </div>
-</section>
+    </section>
     
     <!-- Future Section -->
     <section id="future" class="future-plans">
@@ -430,13 +427,14 @@
     <!-- Footer -->
     <footer>
         <div class="social-links">
-            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a"><i class="fab fa-spotify"></i></a>
+            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" target="_blank">
+                <i class="fab fa-spotify"></i>
+            </a>
         </div>
         <p>From Methuselah to <span class="heart">❤</span> Mercy</p>
     </footer>
 
     <script src="js/script.js"></script>
-    <script src="js/music-player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </body>
 </html>

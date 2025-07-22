@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Gallery | For Someone Special</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css\style.css">
-
-    <style>
-        /* Gallery Grid */
-        
-    </style>
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -110,19 +104,13 @@
                 <div class="gallery-caption">Lol</div>
             </div>
         </div>
-        
+    
+        <!-- Expanded Image Overlay -->
         <div class="overlay" id="overlay">
             <button class="close-btn" onclick="closeImage()">&times;</button>
             <img class="expanded-img" id="expandedImg" src="" alt="">
             <div class="expanded-caption" id="expandedCaption"></div>
         </div>
-    
-            <!-- Expanded Image Overlay -->
-    <div class="overlay" id="overlay">
-        <button class="close-btn" onclick="closeImage()">&times;</button>
-        <img class="expanded-img" id="expandedImg" src="" alt="">
-        <div class="expanded-caption" id="expandedCaption"></div>
-    </div>
 
         <div style="text-align: center;">
             <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
@@ -132,12 +120,13 @@
     <!-- Footer -->
     <footer>
         <div class="social-links">
-
-            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a"></a><i class="fab fa-spotify"></i></a>
+            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" target="_blank">
+                <i class="fab fa-spotify"></i>
+            </a>
         </div>
         <p>From Methuselah to <i class="fas fa-heart" style="color: var(--accent-color);"></i> Mercy</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
