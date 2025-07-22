@@ -691,6 +691,7 @@ section {
     position: relative;
     overflow: hidden;
     min-height: auto; /* Remove fixed min-height */
+    text-align: center;
 }
 
 .messages-container {
@@ -815,6 +816,7 @@ section {
 @media (max-width: 480px) {
     .romantic-messages {
         padding: 40px 5% 30px;
+        text-align: center;
     }
     
     .message-text {
