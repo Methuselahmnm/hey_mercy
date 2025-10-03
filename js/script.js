@@ -446,7 +446,7 @@ function initHeartButton() {
     if (!heartButton) return;
     
     heartButton.addEventListener('click', function() {
-        this.innerHTML = '<i class="fas fa-heart"></i> Yes! I Love You!';
+        this.innerHTML = '<i class="fas fa-heart"></i> I Love You!';
         this.style.background = 'linear-gradient(to right, #8a2be2, #da70d6)';
         
         if (typeof confetti === 'function') {
