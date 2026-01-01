@@ -3,170 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Gallery | For Someone Special</title>
+    <title>Our Gallery | For My Beautiful Mercy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Gallery specific styles */
+        .gallery-main {
+            padding-top: 80px;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 139, 0.1), rgba(138, 43, 226, 0.1));
+        }
+        
+        .gallery-header h1 {
+            font-size: 3rem;
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .stat i {
+            font-size: 2rem;
+            color: #ff6b8b;
+            margin-bottom: 10px;
+        }
+        
+        .stat span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .stat small {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .photo-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            columns: 4;
+            column-gap: 20px;
+        }
+        
+        .photo-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .photo-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover .photo-info {
+            transform: translateY(0);
+        }
+        
+        .photo-info h3 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .photo-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .photo-date {
+            color: #ff6b8b;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .back-home {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .back-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 139, 0.3);
+        }
+        
+        /* Modal */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+        
+        .modal-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 20px;
+            color: white;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 1024px) {
+            .photo-grid {
+                columns: 3;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .photo-grid {
+                columns: 2;
+            }
+            
+            .gallery-stats {
+                gap: 20px;
+            }
+            
+            .stat {
+                min-width: 80px;
+            }
+            
+            .stat span {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .photo-grid {
+                columns: 1;
+            }
+            
+            .gallery-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="heart-loader">
+                <div class="heart-piece"></div>
+                <div class="heart-piece"></div>
+                <div class="heart-piece"></div>
+            </div>
+            <h2 class="loading-text">Loading Our Memories...</h2>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="romantic-quotes">
+                <p class="active">"Every photo tells our story"</p>
+                <p>"Memories to last a lifetime"</p>
+                <p>"Our beautiful journey together"</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav>
-        <a href="index.html" class="logo"><i class="fas fa-heart"></i>To Mercy</a>
-        
-        <button class="mobile-menu-btn" id="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-        
-        <div class="nav-container" id="nav-container">
-            <div class="nav-section">
-                <span class="nav-section-title">Main</span>
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="index.html#memories">Memories</a>
-                </div>
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Back to Home</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#story" class="nav-link"><i class="fas fa-book-heart"></i> Our Story</a>
+                <a href="index.html#music" class="nav-link"><i class="fas fa-music"></i> Our Songs</a>
+                <a href="index.html#messages" class="nav-link"><i class="fas fa-envelope"></i> Love Notes</a>
+                <a href="index.html#future" class="nav-link"><i class="fas fa-star"></i> Future</a>
             </div>
-            
-            <div class="nav-section">
-                <span class="nav-section-title">Media</span>
-                <div class="nav-links">
-                    <a href="index.html#music">Our Songs</a>
-                    <a href="gallery.html">Gallery</a>
-                </div>
-            </div>
-            
-            <div class="nav-section">
-                <span class="nav-section-title">Special</span>
-                <div class="nav-links">
-                    <a href="index.html#messages">Love Notes</a>
-                    <a href="index.html#future">Our Future</a>
-                </div>
-            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
-    
-    <!-- Gallery Header -->
-    <section class="gallery-header">
-        <h1>Our Special Moments</h1>
-        <p>Every picture tells a story of our love and the beautiful memories we've created together.</p>
-    </section>
-    
-    <!-- Gallery Grid -->
-    <section class="gallery-container">
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="gallery/dlila1.jpg" alt="Memory 1">
-                <div class="gallery-caption">Dlila Date night</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/Dlila.jpg" alt="Memory 2">
-                <div class="gallery-caption">Dlila Date night</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/mandahill.jpg" alt="Memory 3">
-                <div class="gallery-caption">Movie Night</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/a4.jpeg" alt="Memory 4">
-                <div class="gallery-caption">Exploring together</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/a7.jpeg" alt="Memory 5">
-                <div class="gallery-caption">Victoria's Wedding</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/Vic 2.jpg" alt="Memory 6">
-                <div class="gallery-caption">Victoria's Wedding</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/favorite.jpg" alt="Memory 7">
-                <div class="gallery-caption">My favorite</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/a9.jpeg" alt="Memory 8">
-                <div class="gallery-caption">Eish</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/a3.jpeg" alt="Memory 9">
-                <div class="gallery-caption">Her smile</div>
-            </div>
 
-            <div class="gallery-item">
-                <img src="gallery/Glowing.jpg" alt="Memory 10">
-                <div class="gallery-caption">Beauty that knows no bounds</div>
+    <!-- Main Content -->
+    <main class="gallery-main">
+        <!-- Gallery Header -->
+        <section class="gallery-header">
+            <h1>Our Special Moments</h1>
+            <p>Every picture tells the story of our beautiful journey together</p>
+            <div class="gallery-stats">
+                <div class="stat">
+                    <i class="fas fa-heart"></i>
+                    <span id="photoCount">22</span>
+                    <small>Memories</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-calendar"></i>
+                    <span>2026</span>
+                    <small>Our Year</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-smile"></i>
+                    <span>∞</span>
+                    <small>Smiles Shared</small>
+                </div>
             </div>
+        </section>
 
-            <div class="gallery-item">
-                <img src="gallery/geez.jpg" alt="Memory 11">
-                <div class="gallery-caption">Shining as bright as the sun</div>
-            </div>
+        <!-- Photo Grid -->
+        <section class="photo-grid" id="photoGrid">
+            <!-- Photos will be loaded here -->
+        </section>
 
-            <div class="gallery-item">
-                <img src="gallery/wow.jpg" alt="Memory 12">
-                <div class="gallery-caption">My Baby</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/Glowing1.jpg" alt="Memory 13">
-                <div class="gallery-caption">Love, laughter, and a little sunshine.</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/vic_3.jpg" alt="Memory 14">
-                <div class="gallery-caption">Powered by love & sunshine.</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/vic_4.jpg" alt="Memory 15">
-                <div class="gallery-caption">Shes Glowing</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/vic_5.jpg" alt="Memory 16">
-                <div class="gallery-caption">Sheeesh</div>
-            </div> 
-            <div class="gallery-item">
-                <img src="gallery/belini5.jpg" alt="Memory 17">
-                <div class="gallery-caption">Belini</div>
-            </div> 
-            <div class="gallery-item">
-                <img src="gallery/belini1.jpg" alt="Memory 18">
-                <div class="gallery-caption">Belini</div>
-            </div> 
-            <div class="gallery-item">
-                <img src="gallery/belini3.jpg" alt="Memory 19">
-                <div class="gallery-caption">Belini</div>
-            </div> 
-            <div class="gallery-item">
-                <img src="gallery/black.jpg" alt="Memory 20">
-                <div class="gallery-caption">Belini</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/belini6.jpg" alt="Memory 21">
-                <div class="gallery-caption">Belini</div>
-            </div>
-            <div class="gallery-item">
-                <img src="gallery/belini7.jpg" alt="Memory 22">
-                <div class="gallery-caption">Belini</div>
-            </div>
-        </div>
-    
-        <!-- Expanded Image Overlay -->
-        <div class="overlay" id="overlay">
-            <button class="close-btn" onclick="closeImage()">&times;</button>
-            <img class="expanded-img" id="expandedImg" src="" alt="">
-            <div class="expanded-caption" id="expandedCaption"></div>
-        </div>
-
-        <div style="text-align: center;">
-            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" target="_blank">
-                <i class="fab fa-spotify"></i>
+        <!-- Back Home -->
+        <section class="back-home">
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i> Back to Home
             </a>
-        </div>
-        <p>From Methuselah to <i class="fas fa-heart" style="color: var(--accent-color);"></i> Mercy</p>
-    </footer>
+        </section>
+    </main>
 
-    <script src="js/script.js"></script>
+    <!-- Photo Modal -->
+    <div class="photo-modal" id="photoModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+                <div class="photo-date" id="modalDate"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating hearts background -->
+    <div class="floating-hearts-bg"></div>
+
+    <script>
+        // Gallery data
+        const galleryPhotos = [
+            { src: 'gallery/dlila1.jpg', title: 'Dlila Date Night', desc: 'Our first special date at Dlila Restaurant', date: 'June 2025' },
+            { src: 'gallery/Dlila.jpg', title: 'Beautiful Evening', desc: 'The night I realized you are my everything', date: 'June 2025' },
+            { src: 'gallery/mandahill.jpg', title: 'Movie Night', desc: 'Cozy moments watching movies together', date: 'June 2025' },
+            { src: 'gallery/a4.jpeg', title: 'Exploring Together', desc: 'Adventures hand in hand', date: 'June 2025' },
+            { src: 'gallery/a7.jpeg', title: "Victoria's Wedding", desc: 'Celebrating love with friends and family', date: '2025' },
+            { src: 'gallery/Vic 2.jpg', title: 'Wedding Joy', desc: 'Sharing special moments', date: '2025' },
+            { src: 'gallery/favorite.jpg', title: 'My Favorite', desc: 'This smile brightens my world', date: '2025' },
+            { src: 'gallery/a9.jpeg', title: 'Eish Moment', desc: 'Funny and cute moments we share', date: '2025' },
+            { src: 'gallery/a3.jpeg', title: 'Her Smile', desc: 'The most beautiful smile in the world', date: '2025' },
+            { src: 'gallery/Glowing.jpg', title: 'Beauty Unlimited', desc: 'Beauty that knows no bounds', date: '2025' },
+            { src: 'gallery/geez.jpg', title: 'Shining Bright', desc: 'As bright as the sun', date: '2025' },
+            { src: 'gallery/wow.jpg', title: 'My Baby', desc: 'My everything', date: '2025' },
+            { src: 'gallery/Glowing1.jpg', title: 'Love & Sunshine', desc: 'Love, laughter, and a little sunshine', date: '2025' },
+            { src: 'gallery/vic_3.jpg', title: 'Powered by Love', desc: 'Powered by love & sunshine', date: '2025' },
+            { src: 'gallery/vic_4.jpg', title: "She's Glowing", desc: 'Radiant beauty', date: '2025' },
+            { src: 'gallery/vic_5.jpg', title: 'Sheeesh', desc: 'Absolutely stunning', date: '2025' },
+            { src: 'gallery/belini5.jpg', title: 'Belini Moments', desc: 'Beautiful memories at Belini', date: '2025' },
+            { src: 'gallery/belini1.jpg', title: 'Belini Date', desc: 'Special moments together', date: '2025' },
+            { src: 'gallery/belini3.jpg', title: 'Belini Smiles', desc: 'Happiness captured', date: '2025' },
+            { src: 'gallery/black.jpg', title: 'Elegant Beauty', desc: 'Stunning in black', date: '2025' },
+            { src: 'gallery/belini6.jpg', title: 'Beautiful Memories', desc: 'Cherished moments', date: '2025' },
+            { src: 'gallery/belini7.jpg', title: 'Lasting Impressions', desc: 'Memories to last a lifetime', date: '2025' }
+        ];
+
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Gallery loading...');
+            
+            // Initialize
+            initGallery();
+            initMobileMenu();
+            
+            // Hide preloader after 2 seconds
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.classList.add('hidden');
+                }
+            }, 2000);
+        });
+
+        function initGallery() {
+            const grid = document.getElementById('photoGrid');
+            const countElement = document.getElementById('photoCount');
+            
+            // Update count
+            countElement.textContent = galleryPhotos.length;
+            
+            // Create photo items
+            galleryPhotos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                item.innerHTML = `
+                    <img src="${photo.src}" alt="${photo.title}" 
+                         onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                    <div class="photo-info">
+                        <h3>${photo.title}</h3>
+                        <p>${photo.desc}</p>
+                        <div class="photo-date">${photo.date}</div>
+                    </div>
+                `;
+                
+                item.addEventListener('click', () => openModal(index));
+                grid.appendChild(item);
+            });
+        }
+
+        function openModal(index) {
+            const photo = galleryPhotos[index];
+            const modal = document.getElementById('photoModal');
+            
+            document.getElementById('modalImage').src = photo.src;
+            document.getElementById('modalTitle').textContent = photo.title;
+            document.getElementById('modalDescription').textContent = photo.desc;
+            document.getElementById('modalDate').textContent = photo.date;
+            
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Create hearts
+            createHearts(5);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('photoModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Create floating hearts
+        function createHearts(count) {
+            let container = document.querySelector('.floating-hearts-bg');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'floating-hearts-bg';
+                document.body.appendChild(container);
+            }
+            
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤️';
+                heart.style.cssText = `
+                    position: fixed;
+                    left: ${Math.random() * 100}vw;
+                    top: ${100 + Math.random() * 20}vh;
+                    font-size: ${15 + Math.random() * 25}px;
+                    opacity: 0;
+                    animation: floatUp ${3 + Math.random() * 7}s linear forwards;
+                    animation-delay: ${Math.random() * 2}s;
+                    z-index: 9998;
+                `;
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heart.parentNode === container) {
+                        container.removeChild(heart);
+                    }
+                }, 10000);
+            }
+        }
+
+        function initMobileMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    menuToggle.innerHTML = navLinks.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+            }
+        }
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Click outside modal to close
+        document.getElementById('photoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Create initial hearts
+        setTimeout(() => {
+            createHearts(5);
+        }, 1000);
+        
+        // Keep creating hearts
+        setInterval(() => {
+            createHearts(1);
+        }, 5000);
+    </script>
 </body>
 </html>

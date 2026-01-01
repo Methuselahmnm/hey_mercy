@@ -3,448 +3,591 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hey Mercy</title>
+    <title>For My Beautiful Mercy ❤️</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loading-screen">
-        <div class="loader">
-            <div class="double-heart-loader">
-                <div class="heart outer-heart"></div>
-                <div class="heart inner-heart"></div>
-                <div class="sparkle s1"></div>
-                <div class="sparkle s2"></div>
-                <div class="sparkle s3"></div>
-                <div class="sparkle s4"></div>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="heart-loader">
+                <div class="heart-piece"></div>
+                <div class="heart-piece"></div>
+                <div class="heart-piece"></div>
             </div>
-            <div class="loading-text">Loading our love story...</div>
-            <div class="loading-progress">
-                <div class="progress-bar" id="progress-bar"></div>
+            <h2 class="loading-text">Loading Our Love Story...</h2>
+            <div class="progress-bar">
+                <div class="progress"></div>
             </div>
             <div class="romantic-quotes">
-                <div class="quote active">"You had me at hello"</div>
-                <div class="quote">"I love you more than yesterday"</div>
-                <div class="quote">"Every love story is beautiful"</div>
-                <div class="quote">"But ours is my favorite"</div>
+                <p class="active">"You are my today and all of my tomorrows"</p>
+                <p>"Every moment with you is magical"</p>
+                <p>"My heart beats only for you"</p>
             </div>
         </div>
     </div>
-    
-    <!-- Navigation -->
-    <nav>
-        <a href="index.html" class="logo"><i class="fas fa-heart"></i> To Mercy</a>
-        <button class="mobile-menu-btn" id="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="nav-container" id="nav-container">
-            <div class="nav-section">
-                <span class="nav-section-title">Main</span>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Navigation -->
+        <nav class="glass-nav">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>For My Mercy</span>
+                </div>
                 <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="index.html#memories">Memories</a>
+                    <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                    <a href="#story" class="nav-link"><i class="fas fa-book-heart"></i> Our Story</a>
+                    <a href="#gallery" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+                    <a href="#music" class="nav-link"><i class="fas fa-music"></i> Our Songs</a>
+                    <a href="#messages" class="nav-link"><i class="fas fa-envelope"></i> Love Notes</a>
+                    <a href="#future" class="nav-link"><i class="fas fa-star"></i> Future</a>
                 </div>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
-            <div class="nav-section">
-                <span class="nav-section-title">Media</span>
-                <div class="nav-links">
-                    <a href="index.html#music">Our Songs</a>
-                    <a href="gallery.html">Gallery</a>
-                </div>
-            </div>
-            <div class="nav-section">
-                <span class="nav-section-title">Special</span>
-                <div class="nav-links">
-                    <a href="index.html#messages">Love Notes</a>
-                    <a href="index.html#future">Our Future</a>
-                </div>
-            </div>
-            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" target="_blank" class="spotify-link">
-                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/09/Spotify_Logo_CMYK_Green.png" alt="Spotify Logo" class="spotify-logo">
-                <span>Listen on Spotify</span>
-            </a>
-        </div>
-    </nav>
-    
-    <!-- Header Section -->
-    <section id="home" class="header">
-        <h1>Hey Mercy</h1>
-        <p>You are my today and all of my tomorrows, I love you more than yesterday, but less than tomorrow. My heart is yours forever.</p>
-        <div class="scroll-down">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
-    
-    <!-- Music Player Section -->
-    <section id="music">
-        <div class="music-player">
-            <div class="player-header">
-                <h2>Our Songs</h2>
-                <p>Music that reminds me of you</p>
-            </div>
-            <div class="player-controls">
-                <div class="song-info">
-                    <img src="gallery/cover1.jpg" onerror="this.src='gallery/cover1.jpg'" alt="Album Cover" id="album-cover">
-                    <h3 id="song-title">Pink + White</h3>
-                    <p id="song-artist">Frank Ocean</p>
-                </div>
-                <div class="progress-container">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <div class="time-info">
-                    <span id="current-time">0:00</span>
-                    <span id="duration">3:30</span>
-                </div>
-                <div class="controls">
-                    <button class="control-btn" id="prev-btn"><i class="fas fa-step-backward"></i></button>
-                    <button class="control-btn play-btn" id="play-btn"><i class="fas fa-play" id="play-icon"></i></button>
-                    <button class="control-btn" id="next-btn"><i class="fas fa-step-forward"></i></button>
-                </div>
-            </div>
-            <div class="playlist">
-                <h3>Playlist</h3>
-                <div class="playlist-item active" data-src="media/Frank_Ocean_-_Pink___White(256k).mp3" data-title="Pink + White" data-artist="Frank Ocean" data-cover="gallery/blond.jpg">
-                    <img src="gallery/blond.jpg" alt="Song Cover">
-                    <div class="playlist-item-info">
-                        <h4>Pink + White</h4>
-                        <p>Frank Ocean</p>
-                    </div>
-                </div>
-                <div class="playlist-item" data-src="media/Joe_Cocker_-_You_Are_So_Beautiful__Lyric_Video_(256k).mp3" data-title="You Are So Beautiful" data-artist="Joe Cocker" data-cover="gallery/joe cocker.jpg">
-                    <img src="gallery/joe cocker.jpg" alt="Song Cover">
-                    <div class="playlist-item-info">
-                        <h4>You Are So Beautiful</h4>
-                        <p>Joe Cocker</p>
-                    </div>
-                </div>
-                <div class="playlist-item" data-src="media/yung_kai_-_blue__Lyrics_(256k).mp3" data-title="Blue" data-artist="Yung Kai" data-cover="gallery/blue.jpg">
-                    <img src="gallery/blue.jpg" alt="Song Cover">
-                    <div class="playlist-item-info">
-                        <h4>Blue</h4>
-                        <p>Yung Kai</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Memories Section -->
-    <section id="memories" class="memories">
-        <h2>Beautiful Memories</h2>
-        <div class="memory-text">
-            <p>Every moment with you becomes a cherished memory. From our first meeting to all the little things in between, each memory is a treasure I hold close to my heart.</p>
-            <p>Your smile brightens my darkest days, your laugh is my favorite melody, and meeting you is the best thing to ever happen to me.</p>
-            <p>I look forward to creating countless more memories with you, growing together, and loving you more each day.</p>
-        </div>
-        <a href="gallery.html" class="gallery-link">View Our Gallery <i class="fas fa-arrow-right"></i></a>
-    </section>
-    
-    <!-- Love Notes Section -->
-    <section id="messages" class="messages">
-        <h2>From Methuselah</h2>
-        <div class="message-tiles">
-            <div class="message-tile message-tile-featured">
-                <div class="tile-header">
-                    <i class="fas fa-heart"></i>
-                    <h3>From Methuselah</h3>
-                </div>
-                <div class="tile-content">
-                    <p>
-                        Hi Mercy Long Time,<br><br>
+        </nav>
 
-                        Loving you has made me certain of one thing the future feels brighter because you are in it. No matter what tomorrow brings, I want you to know that you are never alone. I choose you, not just today, but in every step we will take forward together.
-
-                        There will be days filled with laughter and days that test us, but through it all, my heart remains yours. I believe in us, in the love we are building, and in the life we are slowly shaping side by side. With you, the future isn’t something to fear it’s something I look forward to.
-
-                        This space is a small promise, written quietly but meant deeply that my love for you is steady, intentional, and here to stay.
-
-                        Forever and always,<br>
-                        Methuselah Isaac Mwaba<br><br>
-
-                        P.S. You are my favorite everything.
-                    </p>
-                </div>
-                <div class="tile-footer">
-                    <span class="tile-date">December 2025</span>
-                    <div class="tile-hearts">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="animated-text">Hey Beautiful <span class="highlight">Mercy</span></h1>
+                    <p class="subtitle">Hey you its a brand new year with a brand new twist. May this year be better than our last.</p>
+                    <div class="heart-animation">
                         <i class="fas fa-heart"></i>
                         <i class="fas fa-heart"></i>
                         <i class="fas fa-heart"></i>
                     </div>
+                    <button class="love-button" onclick="showLoveMessage()">
+                        <i class="fas fa-heart"></i> Click for a surprise!
+                    </button>
+                </div>
+                <div class="hero-image">
+                    <div class="floating-photo">
+                        <img src="gallery/favorite.jpg" alt="My Beautiful Mercy" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                        <div class="photo-frame"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Romantic Messages Section -->
-    <section id="notes" class="romantic-messages">
-        <div class="section-header">
-            <h2>Love Letters to You</h2>
-            <div class="divider">
-                <div class="divider-line"></div>
-                <i class="fas fa-heart"></i>
-                <div class="divider-line"></div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
             </div>
-            <p class="section-subtitle">Words from my heart to yours</p>
-        </div>
+        </section>
 
-        <div class="messages-container">
-            <!-- Main Featured Message -->
-            <div class="featured-message">
-                <div class="message-card active">
-                    <div class="card-header">
-                        <i class="fas fa-quote-left"></i>
-                        <div class="message-meta">
-                            <span class="message-date">Today</span>
-                            <div class="message-hearts">
-                                <i class="fas fa-heart"></i>
-                                <i class="fas fa-heart"></i>
-                                <i class="fas fa-heart"></i>
+        <!-- Our Story -->
+        <section id="story" class="story-section">
+            <h2 class="section-title">Our Beautiful Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-icon"><i class="fas fa-heart"></i></div>
+                        <div class="timeline-text">
+                            <h3>First Meeting</h3>
+                            <p>The moment I saw you, my world changed forever. Your smile lit up the room.</p>
+                            <span class="date">May 13th, 2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-icon"><i class="fas fa-star"></i></div>
+                        <div class="timeline-text">
+                            <h3>First Date</h3>
+                            <p>Dlila Restaurant - The night I realized you're the one I want forever.</p>
+                            <span class="date">November 2nd 2024</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-icon"><i class="fas fa-ring"></i></div>
+                        <div class="timeline-text">
+                            <h3>Our Promise</h3>
+                            <p>July 23, 2025 - The day I knew I wanted to spend my life with you.</p>
+                            <span class="date">July 23, 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Preview -->
+        <section id="gallery" class="gallery-section">
+            <h2 class="section-title">Our Special Moments</h2>
+            <div class="gallery-preview">
+                <div class="preview-grid">
+                    <div class="preview-item" onclick="openGallery()">
+                        <img src="gallery/dlila1.jpg" alt="Dlila Date" onerror="this.src='https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                        <div class="preview-overlay">
+                            <i class="fas fa-heart"></i>
+                            <span>Dlila Date</span>
+                        </div>
+                    </div>
+                    <div class="preview-item" onclick="openGallery()">
+                        <img src="gallery/mandahill.jpg" alt="Movie Night" onerror="this.src='https://images.unsplash.com/photo-1529254479751-fbacb4c7a587?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                        <div class="preview-overlay">
+                            <i class="fas fa-film"></i>
+                            <span>Movie Night</span>
+                        </div>
+                    </div>
+                    <div class="preview-item" onclick="openGallery()">
+                        <img src="gallery/Glowing.jpg" alt="Beautiful Mercy" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                        <div class="preview-overlay">
+                            <i class="fas fa-star"></i>
+                            <span>Beautiful You</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="gallery.html" class="view-all-btn">
+                    <i class="fas fa-images"></i> View All Memories
+                </a>
+            </div>
+        </section>
+
+        <!-- Music Player -->
+        <section id="music" class="music-section">
+            <h2 class="section-title">Our Love Songs</h2>
+            <div class="music-player">
+                <div class="player-header">
+                    <h3><i class="fas fa-headphones"></i> Songs That Remind Me of You</h3>
+                </div>
+                <div class="player-body">
+                    <div class="album-art">
+                        <img id="albumCover" src="gallery/blond.jpg" alt="Album Cover" onerror="this.src='https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                        <div class="vinyl-ring"></div>
+                    </div>
+                    <div class="song-info">
+                        <h4 id="songTitle">Pink + White</h4>
+                        <p id="songArtist">Frank Ocean</p>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <button class="control-btn" onclick="previousSong()"><i class="fas fa-step-backward"></i></button>
+                        <button class="control-btn play-btn" onclick="togglePlay()">
+                            <i class="fas fa-play" id="playIcon"></i>
+                        </button>
+                        <button class="control-btn" onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
+                        <button class="control-btn" onclick="toggleMute()"><i class="fas fa-volume-up" id="volumeIcon"></i></button>
+                    </div>
+                    <div class="playlist">
+                        <div class="playlist-item active" data-index="0">
+                            <span>Pink + White</span>
+                            <span>Frank Ocean</span>
+                        </div>
+                        <div class="playlist-item" data-index="1">
+                            <span>You Are So Beautiful</span>
+                            <span>Joe Cocker</span>
+                        </div>
+                        <div class="playlist-item" data-index="2">
+                            <span>Blue</span>
+                            <span>Yung Kai</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Love Messages -->
+        <section id="messages" class="messages-section">
+            <h2 class="section-title">Love Letters to You</h2>
+            <div class="messages-container">
+                <div class="message-carousel">
+                    <div class="message active">
+                        <div class="message-content">
+                            <h3>My Dearest Mercy,</h3>
+                            <p>Every time I see your smile, my world lights up. You are the most beautiful person I've ever known, inside and out. I cherish every moment with you.</p>
+                            <div class="message-footer">
+                                <span>Forever yours, Methuselah</span>
+                                <!--<div class="heart-reaction">
+                                    <button onclick="addHeartReaction(this)"><i class="fas fa-heart"></i> <span class="like-count">1</span></button>
+                                </div> -->
                             </div>
                         </div>
                     </div>
-                    <div class="card-content">
-                        <p class="message-text">Every moment with you feels like a beautiful dream I never want to wake up from.</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="signature">- Methuselah</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Message Carousel -->
-            <div class="message-carousel">
-                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                
-                <div class="carousel-track">
-                    <div class="message-thumbnail" data-index="0">
-                        <div class="thumbnail-content">
-                            <i class="fas fa-heart"></i>
-                            <p>My Dearest Mercy...</p>
-                        </div>
-                    </div>
-                    <div class="message-thumbnail" data-index="1">
-                        <div class="thumbnail-content">
-                            <i class="fas fa-star"></i>
-                            <p>Your smile...</p>
-                        </div>
-                    </div>
-                    <div class="message-thumbnail" data-index="2">
-                        <div class="thumbnail-content">
-                            <i class="fas fa-moon"></i>
-                            <p>At night...</p>
-                        </div>
-                    </div>
-                    <div class="message-thumbnail" data-index="3">
-                        <div class="thumbnail-content">
-                            <i class="fas fa-sun"></i>
-                            <p>Morning thoughts...</p>
-                        </div>
-                    </div>
-                    <div class="message-thumbnail" data-index="4">
-                        <div class="thumbnail-content">
-                            <i class="fas fa-music"></i>
-                            <p>Our song...</p>
+                    <div class="message">
+                        <div class="message-content">
+                            <h3>To My Sunshine,</h3>
+                            <p>No matter what challenges come our way, I know we can face them together. Your strength inspires me every day. I'm so grateful for you.</p>
+                            <div class="message-footer">
+                                <span>Always, Methuselah</span>
+                               <!-- <div class="heart-reaction">
+                                    <button onclick="addHeartReaction(this)"><i class="fas fa-heart"></i> <span class="like-count">12</span></button>
+                                </div>-->
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-
-            <!-- Compose New Message Button -->
-            <button class="compose-btn">
-                <i class="fas fa-plus"></i> New Love Note
-            </button>
-        </div>
-
-        <!-- Floating Hearts Decoration -->
-        <div class="floating-hearts">
-            <div class="heart heart-1"></div>
-            <div class="heart heart-2"></div>
-            <div class="heart heart-3"></div>
-            <div class="heart heart-4"></div>
-            <div class="heart heart-5"></div>
-        </div>
-    </section>
-    
-    <!-- Future Section -->
-    <section id="future" class="future-plans">
-        <h2>Our Future Together</h2>
-        <div class="future-tiles">
-            <div class="future-tile future-tile-main">
-                <div class="tile-header">
-                    <i class="fas fa-heartbeat"></i>
-                    <h3>My Vision For Us</h3>
-                </div>
-                <div class="tile-content">
-                    <p>
-                        Hey Babe,<br>
-
-I was just thinking about you and couldn’t keep this smile off my face. It happens all the time, really.
-From our biggest laughs to our quietest cuddles, every moment with you just feels… right.
-You are my favorite hello and my hardest goodbye.
-
-What reassures me most is knowing that, no matter what lies ahead, we’re walking toward it together. I believe in us, in the love we’re building, and in the future we’re shaping one day at a time. With you, the days ahead feel safe, hopeful, and full of promise.
-
-                        All my love,<br><br>
-                        Methuselah
-
-                    </p>
-                </div>
-                <div class="tile-actions">
-                    <button class="heart-button">
-                        <i class="fas fa-heart"></i> She said Yes!
-                    </button>
-                </div>
-                <div class="tile-footer">
-                    <span class="tile-promise">Promise Date: <span class="highlight">July 23 2025</span></span>
-                    <div class="tile-sparkles">
-                        <i class="fas fa-sparkle"></i>
-                        <i class="fas fa-sparkle"></i>
-                        <i class="fas fa-sparkle"></i>
-                    </div>
+                <div class="compose-message">
+                    <h3><i class="fas fa-edit"></i> Write Back to Me</h3>
+                    <textarea id="loveNote" placeholder="Write your message here..."></textarea>
+                    <button onclick="sendLoveNote()"><i class="fas fa-paper-plane"></i> Send Love</button>
                 </div>
             </div>
-            <div class="future-tile future-tile-milestones">
-                <div class="tile-header">
-                    <i class="fas fa-calendar-heart"></i>
-                    <h3>Future Milestones</h3>
-                </div>
-                <div class="tile-content">
-                    <ul class="milestones-list">
-                        <li>
-                            <i class="fas fa-heart"></i>
-                            <span>Our first anniversary celebration</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-heart"></i>
-                            <span>Traveling to new places together</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-heart"></i>
-                            <span>Supporting each other's dreams</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-heart"></i>
-                            <span>Growing together every day</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="tile-footer">
-                    <span class="tile-note">More to be added as we create them</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Countdown Section -->
-    <section id="countdown" class="countdown">
-        <h2>Counting Down to Special Days</h2>
-        <p class="countdown-subtitle">Every day with you is special</p>
-        <div class="countdown-container">
-            <div class="countdown-item">
-                <h3>First Time I Saw You</h3>
-                <div class="countdown-timer" data-date="2026-05-13">
-                    <div class="time-unit">
-                        <span class="number" id="days1">00</span>
-                        <span class="label">Days</span>
-                    </div>
-                    <div class="time-unit">
-                        <span class="number" id="hours1">00</span>
-                        <span class="label">Hours</span>
-                    </div>
-                    <div class="time-unit">
-                        <span class="number" id="minutes1">00</span>
-                        <span class="label">Minutes</span>
-                    </div>
-                    <div class="time-unit">
-                        <span class="number" id="seconds1">00</span>
-                        <span class="label">Seconds</span>
-                    </div>
-                </div>
-                <p class="countdown-date">May 13th</p>
+        <!-- Future Plans -->
+        <section id="future" class="future-section">
+            <h2 class="section-title">Our Beautiful Future Together</h2>
+            
+            <!-- Category Tabs -->
+            <div class="future-tabs">
+                <button class="future-tab active" data-category="everyday">
+                    <i class="fas fa-heartbeat"></i> Everyday Moments
+                </button>
+                <button class="future-tab" data-category="fun">
+                    <i class="fas fa-star"></i> Fun Adventures
+                </button>
+                <button class="future-tab" data-category="growth">
+                    <i class="fas fa-seedling"></i> Growth Together
+                </button>
+                <button class="future-tab" data-category="long-term">
+                    <i class="fas fa-mountain"></i> Long-Term Dreams
+                </button>
             </div>
-            <div class="countdown-item">
-                <h3>Our Special Day</h3>
-                <div class="countdown-timer" data-date="2026-07-20">
-                    <div class="time-unit">
-                        <span class="number" id="days2">00</span>
-                        <span class="label">Days</span>
+            
+            <!-- Everyday Moments -->
+            <div class="future-category active" id="everyday">
+                <h3 class="category-title"><i class="fas fa-heartbeat"></i> Simple & Everyday Plans</h3>
+                <div class="future-cards">
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-calendar-day"></i></div>
+                        <h3>Regular Date Nights</h3>
+                        <p>Go out on dates, both big and small, keeping the romance alive.</p>
+                        <button class="wish-btn" onclick="addWish('dates')">Make a Wish</button>
                     </div>
-                    <div class="time-unit">
-                        <span class="number" id="hours2">00</span>
-                        <span class="label">Hours</span>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-walking"></i></div>
+                        <h3>Evening Walks</h3>
+                        <p>Take evening walks and just talk about our day, sharing everything.</p>
+                        <button class="wish-btn" onclick="addWish('walks')">Make a Wish</button>
                     </div>
-                    <div class="time-unit">
-                        <span class="number" id="minutes2">00</span>
-                        <span class="label">Minutes</span>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-film"></i></div>
+                        <h3>Movie Nights</h3>
+                        <p>Watch movies or series together at home or in the cinema, cuddled up.</p>
+                        <button class="wish-btn" onclick="addWish('movies')">Make a Wish</button>
                     </div>
-                    <div class="time-unit">
-                        <span class="number" id="seconds2">00</span>
-                        <span class="label">Seconds</span>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-utensils"></i></div>
+                        <h3>Food Adventures</h3>
+                        <p>Try new food spots or cook together, creating delicious memories.</p>
+                        <button class="wish-btn" onclick="addWish('food')">Make a Wish</button>
                     </div>
-                </div>
-                <p class="countdown-date">July 20th</p>
-            </div>
-            <div class="countdown-item">
-                <h3>Mercy's Birthday</h3>
-                <div class="countdown-timer" data-date="2026-08-20">
-                    <div class="time-unit">
-                        <span class="number" id="days3">00</span>
-                        <span class="label">Days</span>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-mug-hot"></i></div>
+                        <h3>Quiet Moments</h3>
+                        <p>Spend quiet time together without pressure, just enjoying each other.</p>
+                        <button class="wish-btn" onclick="addWish('quiet')">Make a Wish</button>
                     </div>
-                    <div class="time-unit">
-                        <span class="number" id="hours3">00</span>
-                        <span class="label">Hours</span>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-hands-helping"></i></div>
+                        <h3>Support System</h3>
+                        <p>Support each other during stressful or tough days, always there.</p>
+                        <button class="wish-btn" onclick="addWish('support')">Make a Wish</button>
                     </div>
-                    <div class="time-unit">
-                        <span class="number" id="minutes3">00</span>
-                        <span class="label">Minutes</span>
-                    </div>
-                    <div class="time-unit">
-                        <span class="number" id="seconds3">00</span>
-                        <span class="label">Seconds</span>
-                    </div>
-                </div>
-                <p class="countdown-date">August 20th</p>
-            </div>
-            <div class="countdown-item">
-            <h3>Anniversary</h3>
-            <div class="countdown-timer" data-date="2026-07-23">
-                <div class="time-unit">
-                    <span class="number" id="days4">00</span>
-                    <span class="label">Days</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="hours4">00</span>
-                    <span class="label">Hours</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="minutes4">00</span>
-                    <span class="label">Minutes</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="seconds4">00</span>
-                    <span class="label">Seconds</span>
                 </div>
             </div>
-            <p class="countdown-date">July 23rd</p>
-        </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" target="_blank">
-                <i class="fab fa-spotify"></i>
-            </a>
-        </div>
-        <p>From Methuselah to <span class="heart">❤</span> Mercy</p>
-    </footer>
+            
+            <!-- Fun Adventures -->
+            <div class="future-category" id="fun">
+                <h3 class="category-title"><i class="fas fa-star"></i> Fun & Meaningful Plans</h3>
+                <div class="future-cards">
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-road"></i></div>
+                        <h3>Short Trips</h3>
+                        <p>Take short trips or day outings together, exploring new places.</p>
+                        <button class="wish-btn" onclick="addWish('trips')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-music"></i></div>
+                        <h3>Events Together</h3>
+                        <p>Attend concerts, church events, shows, and special occasions together.</p>
+                        <button class="wish-btn" onclick="addWish('events')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-history"></i></div>
+                        <h3>Our Traditions</h3>
+                        <p>Create small traditions just for us, making our bond unique.</p>
+                        <button class="wish-btn" onclick="addWish('traditions')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                        <h3>Celebrate Milestones</h3>
+                        <p>Celebrate our achievements and milestones, big and small.</p>
+                        <button class="wish-btn" onclick="addWish('milestones')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Learn Together</h3>
+                        <p>Learn something new together—a skill, hobby, or activity.</p>
+                        <button class="wish-btn" onclick="addWish('learn')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-laugh"></i></div>
+                        <h3>Create Joy</h3>
+                        <p>Fill our lives with laughter, fun, and beautiful memories.</p>
+                        <button class="wish-btn" onclick="addWish('joy')">Make a Wish</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Growth Together -->
+            <div class="future-category" id="growth">
+                <h3 class="category-title"><i class="fas fa-seedling"></i> Growth & Emotional Plans</h3>
+                <div class="future-cards">
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-comments"></i></div>
+                        <h3>Better Communication</h3>
+                        <p>Grow emotionally together and communicate better every day.</p>
+                        <button class="wish-btn" onclick="addWish('communication')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                        <h3>Support Dreams</h3>
+                        <p>Support each other's goals and ambitions, cheering each other on.</p>
+                        <button class="wish-btn" onclick="addWish('dreams')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                        <h3>Build Trust</h3>
+                        <p>Build trust, understanding, and patience in our relationship.</p>
+                        <button class="wish-btn" onclick="addWish('trust')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-peace"></i></div>
+                        <h3>Peaceful Relationship</h3>
+                        <p>Create a peaceful and supportive environment for each other.</p>
+                        <button class="wish-btn" onclick="addWish('peace')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-heart"></i></div>
+                        <h3>Deeper Connection</h3>
+                        <p>Deepen our emotional connection and understanding of each other.</p>
+                        <button class="wish-btn" onclick="addWish('connection')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Personal Growth</h3>
+                        <p>Help each other become the best versions of ourselves.</p>
+                        <button class="wish-btn" onclick="addWish('growth')">Make a Wish</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Long-Term Dreams -->
+            <div class="future-category" id="long-term">
+                <h3 class="category-title"><i class="fas fa-mountain"></i> Long-Term & Future Plans</h3>
+                <div class="future-cards">
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-home"></i></div>
+                        <h3>Our Home</h3>
+                        <p>A place filled with love, laughter, and memories we'll create together.</p>
+                        <button class="wish-btn" onclick="addWish('home')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-plane"></i></div>
+                        <h3>Travel Together</h3>
+                        <p>Exploring the world hand in hand, creating unforgettable adventures.</p>
+                        <button class="wish-btn" onclick="addWish('travel')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-ring"></i></div>
+                        <h3>Forever Together</h3>
+                        <p>Growing old together, loving each other more with each passing day.</p>
+                        <button class="wish-btn" onclick="addWish('forever')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-baby"></i></div>
+                        <h3>Family Plans</h3>
+                        <p>Building a family together when the time is right for both of us.</p>
+                        <button class="wish-btn" onclick="addWish('family')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Step-by-Step Future</h3>
+                        <p>Plan for the future step by step, without rushing, together.</p>
+                        <button class="wish-btn" onclick="addWish('future-steps')">Make a Wish</button>
+                    </div>
+                    <div class="future-card">
+                        <div class="card-icon"><i class="fas fa-infinity"></i></div>
+                        <h3>Lifetime Partnership</h3>
+                        <p>Building a partnership that lasts a lifetime, through everything.</p>
+                        <button class="wish-btn" onclick="addWish('partnership')">Make a Wish</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="future-quote">
+                <p><i class="fas fa-quote-left"></i> The best thing about the future is that it comes one day at a time, and I'm grateful to spend each one with you. <i class="fas fa-quote-right"></i></p>
+            </div>
+        </section>
+
+        <!-- Countdown Timer -->
+        <section class="countdown-section">
+            <h2 class="section-title">Counting Our Special Moments</h2>
+            
+            <div class="countdown-tabs">
+                <button class="countdown-tab active" data-target="anniversary">
+                    <i class="fas fa-heart"></i> Our Anniversary
+                </button>
+                <button class="countdown-tab" data-target="birthday">
+                    <i class="fas fa-birthday-cake"></i> Mercy's Birthday
+                </button>
+                <button class="countdown-tab" data-target="first-meet">
+                    <i class="fas fa-star"></i> First Meeting
+                </button>
+                <button class="countdown-tab" data-target="special-day">
+                    <i class="fas fa-gem"></i> Our Special Day
+                </button>
+            </div>
+            
+            <!-- Anniversary Countdown (Default) -->
+            <div class="countdown-display active" id="anniversary-countdown">
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days-anniversary">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours-anniversary">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes-anniversary">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds-anniversary">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <p class="countdown-text" id="text-anniversary">Until our next anniversary on July 23, 2026</p>
+            </div>
+            
+            <!-- Birthday Countdown -->
+            <div class="countdown-display" id="birthday-countdown">
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days-birthday">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours-birthday">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes-birthday">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds-birthday">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <p class="countdown-text" id="text-birthday">Until My Baby's birthday on August 20, 2026</p>
+            </div>
+            
+            <!-- First Meeting Countdown -->
+            <div class="countdown-display" id="first-meet-countdown">
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days-first-meet">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours-first-meet">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes-first-meet">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds-first-meet">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <p class="countdown-text" id="text-first-meet">Until the anniversary of our first meeting on May 13, 2024</p>
+            </div>
+            
+            <!-- Special Day Countdown -->
+            <div class="countdown-display" id="special-day-countdown">
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days-special-day">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours-special-day">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes-special-day">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds-special-day">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <p class="countdown-text" id="text-special-day">Until our special day on July 20, 2026</p>
+            </div>
+            
+            <div class="countdown-info">
+                <p><i class="fas fa-heart"></i> Every moment with you is special</p>
+            </div>
+        </section>
+
+        <!-- Memory Game -->
+        <section class="game-section">
+            <h2 class="section-title">Our Memory Match</h2>
+            <div class="memory-game">
+                <div class="game-grid" id="memoryGrid">
+                    <!-- Cards will be generated by JavaScript -->
+                </div>
+                <div class="game-info">
+                    <p>Matches: <span id="score">0</span>/8</p>
+                    <button onclick="resetGame()"><i class="fas fa-redo"></i> Play Again</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="love-meter">
+                    <h3>Our Love Level</h3>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="loveMeter" style="width: 75%"></div>
+                    </div>
+                    <button onclick="increaseLove()"><i class="fas fa-heart"></i> Increase Love</button>
+                </div>
+                <div class="footer-text">
+                    <p>Made with <i class="fas fa-heart"></i> by Methuselah for Mercy</p>
+                    <p>Every day I love you more than yesterday</p>
+                    <div class="spotify-link">
+                        <a href="https://open.spotify.com/playlist/1vrLfUyopIUbpYADtbTJwT?si=7b21e353955b472a" target="_blank">
+                            <i class="fab fa-spotify"></i> Listen on Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
 
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
