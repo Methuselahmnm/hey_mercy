@@ -756,7 +756,7 @@
         const SHEET_NAME = 'Sheet1';
         
         // Google Apps Script Web App URL (I'll create this for you)
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnoQDaUiD_FgYFIN3trEPTLqxNn02mFSMY9bRwcoRRJngBkJ1JRfooM1coF21ohYIX/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOsCgezSGffxywpdMHMqtaFK03JzUHeoPZm0QtB4nqb0MVt-6jVcpBsnPjy9LR2EoK/exec';
         
         let wishes = [];
         let currentFilter = 'all';
@@ -848,7 +848,7 @@
             }
         }
 
-        // Save wishlist to Google Sheets - FIXED VERSION
+        // Save wishlist to Google Sheets - USING GET ONLY (No CORS issues)
         async function saveWishlistToGoogleSheets() {
             if (isSyncing) return;
             
@@ -858,57 +858,55 @@
             try {
                 // Convert wishes to spreadsheet rows
                 const rows = wishes.map(wish => [
-                    wish.id,
-                    wish.title,
-                    wish.description,
-                    wish.price,
-                    wish.priority,
-                    wish.addedBy,
-                    wish.date,
+                    wish.id.toString(),
+                    wish.title || '',
+                    wish.description || '',
+                    wish.price || 'Flexible',
+                    wish.priority || 'medium',
+                    wish.addedBy || 'unknown',
+                    wish.date || new Date().toISOString(),
                     wish.fulfilled ? 'TRUE' : 'FALSE'
                 ]);
                 
-                // FIXED: Send all parameters in POST body
-                console.log('Sending data to Google Sheets:', rows);
+                console.log('Saving', rows.length, 'items to Google Sheets');
                 
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: 'save',
-                        sheetId: GOOGLE_SHEET_ID,
-                        sheetName: SHEET_NAME,
-                        data: rows
-                    })
-                });
+                // Encode data for URL
+                const dataStr = encodeURIComponent(JSON.stringify(rows));
                 
+                // Use GET request with URL parameters (no CORS issues)
+                const url = `${GOOGLE_SCRIPT_URL}?action=save&sheetId=${GOOGLE_SHEET_ID}&sheetName=${SHEET_NAME}&data=${dataStr}&t=${Date.now()}`;
+                
+                console.log('Request URL (shortened):', url.substring(0, 100) + '...');
+                
+                const response = await fetch(url);
                 const result = await response.json();
-                console.log('Save response:', result);
+                
+                console.log('Save result:', result);
                 
                 if (result.success) {
                     // Cache locally
                     localStorage.setItem('wishlistCache', JSON.stringify(wishes));
                     updateLastSync();
                     updateSyncStatus('connected', 'Saved to Google Sheets!');
-                    showNotification('Changes saved to cloud! ✨');
+                    showNotification('✅ Changes saved to cloud!');
+                    
+                    // Refresh data to confirm
+                    setTimeout(() => loadWishlistFromGoogleSheets(), 1000);
                 } else {
                     throw new Error(result.error || 'Save failed');
                 }
                 
             } catch (error) {
                 console.error('Error saving to Google Sheets:', error);
-                updateSyncStatus('error', 'Save failed. Changes cached locally.');
-                showNotification('⚠️ Changes saved locally only');
+                updateSyncStatus('error', 'Save failed. Using local cache.');
+                showNotification('⚠️ Saved locally only - ' + error.message);
                 
-                // Cache locally anyway
+                // Save to localStorage as backup
                 localStorage.setItem('wishlistCache', JSON.stringify(wishes));
             } finally {
                 isSyncing = false;
             }
         }
-
         // Initialize form
         function initForm() {
             const form = document.getElementById('wishForm');
