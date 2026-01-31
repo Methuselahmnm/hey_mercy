@@ -756,7 +756,7 @@
         const SHEET_NAME = 'Sheet1';
         
         // Google Apps Script Web App URL (I'll create this for you)
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxD80r1qC2fPunplcR5LtKvtYINkgMlcByzv08EQ924A1dWYocZc7zzAEdgw1KahXx0/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwNAzrYYId5xl5Z8zY__Ty5XWiFAYRRkn3DrAgtNK12MDZKXrVeNHvzndwpDlKeAi0Y/exec';
         
         let wishes = [];
         let currentFilter = 'all';
@@ -848,7 +848,7 @@
             }
         }
 
-        // Save wishlist to Google Sheets
+        // Save wishlist to Google Sheets - FIXED VERSION
         async function saveWishlistToGoogleSheets() {
             if (isSyncing) return;
             
@@ -868,17 +868,24 @@
                     wish.fulfilled ? 'TRUE' : 'FALSE'
                 ]);
                 
-                const url = `${GOOGLE_SCRIPT_URL}?action=save&sheetId=${GOOGLE_SHEET_ID}&sheetName=${SHEET_NAME}`;
+                // FIXED: Send all parameters in POST body
+                console.log('Sending data to Google Sheets:', rows);
                 
-                const response = await fetch(url, {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ data: rows })
+                    body: JSON.stringify({
+                        action: 'save',
+                        sheetId: GOOGLE_SHEET_ID,
+                        sheetName: SHEET_NAME,
+                        data: rows
+                    })
                 });
                 
                 const result = await response.json();
+                console.log('Save response:', result);
                 
                 if (result.success) {
                     // Cache locally
@@ -894,6 +901,9 @@
                 console.error('Error saving to Google Sheets:', error);
                 updateSyncStatus('error', 'Save failed. Changes cached locally.');
                 showNotification('⚠️ Changes saved locally only');
+                
+                // Cache locally anyway
+                localStorage.setItem('wishlistCache', JSON.stringify(wishes));
             } finally {
                 isSyncing = false;
             }
