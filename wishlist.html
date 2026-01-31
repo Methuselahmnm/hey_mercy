@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Gift Wishlist ❤️ - For Mercy</title>
+    <title>Our Collaborative Wishlist ❤️ - For My Beautiful Mercy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -17,6 +17,7 @@
             text-align: center;
             padding: 60px 20px;
             background: linear-gradient(135deg, rgba(255, 107, 139, 0.1), rgba(138, 43, 226, 0.1));
+            border-radius: 0 0 30px 30px;
         }
         
         .wishlist-header h1 {
@@ -93,9 +94,35 @@
             padding: 20px;
             border-radius: 15px;
             margin: 20px auto;
-            max-width: 600px;
+            max-width: 800px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sync-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .sync-status i {
+            font-size: 1.2rem;
+        }
+        
+        .sync-status.connected i {
+            color: #4CAF50;
+            animation: pulse 2s infinite;
+        }
+        
+        .sync-status.syncing i {
+            color: #FFC107;
+            animation: spin 1s linear infinite;
+        }
+        
+        .sync-status.error i {
+            color: #ff6b8b;
         }
         
         .sync-buttons {
@@ -125,10 +152,6 @@
         
         .sync-import {
             background: linear-gradient(to right, #00d4ff, #0077ff);
-        }
-        
-        .sync-email {
-            background: linear-gradient(to right, #34d399, #10b981);
         }
         
         .sync-btn:hover {
@@ -399,6 +422,7 @@
             text-align: center;
             padding: 60px 20px;
             grid-column: 1 / -1;
+            display: none;
         }
         
         .empty-state i {
@@ -469,68 +493,9 @@
             }
         }
         
-        .email-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 10001;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .email-modal-content {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .email-modal h3 {
-            color: #ff6b8b;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .email-input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-        
-        .email-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        
-        .email-btn {
-            padding: 12px 25px;
-            border-radius: 25px;
-            border: none;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        .email-send {
-            background: linear-gradient(to right, #ff6b8b, #8a2be2);
-        }
-        
-        .email-cancel {
-            background: rgba(255, 255, 255, 0.1);
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
         .love-quote {
@@ -601,14 +566,14 @@
                 <div class="heart-piece"></div>
                 <div class="heart-piece"></div>
             </div>
-            <h2 class="loading-text">Loading Our Gift Wishlist...</h2>
+            <h2 class="loading-text">Loading Our Collaborative Wishlist...</h2>
             <div class="progress-bar">
                 <div class="progress"></div>
             </div>
             <div class="romantic-quotes">
-                <p class="active">"Making wishes together"</p>
-                <p>"Dreaming of our future"</p>
-                <p>"Every wish is a promise"</p>
+                <p class="active">"Sharing dreams together"</p>
+                <p>"Every wish brings us closer"</p>
+                <p>"Building our future one wish at a time"</p>
             </div>
         </div>
     </div>
@@ -636,8 +601,8 @@
     <main class="wishlist-main">
         <!-- Wishlist Header -->
         <section class="wishlist-header">
-            <h1>Our Gift Wishlist 💝</h1>
-            <p>Things we dream of having together. Add your wishes and I'll add mine!</p>
+            <h1>Our Collaborative Wishlist 💝</h1>
+            <p>Real-time sharing between you and Mercy!</p>
             
             <div class="couple-avatars">
                 <div class="avatar">
@@ -665,26 +630,32 @@
                     <span id="methuselahWishes">0</span>
                     <small>Methuselah's Wishes</small>
                 </div>
+                <div class="stat">
+                    <i class="fas fa-sync-alt"></i>
+                    <span id="lastSync">--:--</span>
+                    <small>Last Sync</small>
+                </div>
             </div>
         </section>
 
         <!-- Sync Section -->
         <section class="sync-section">
-            <h3 style="color: #00d4ff; margin-bottom: 10px;">
-                <i class="fas fa-sync-alt"></i> Keep in Sync
-            </h3>
+            <div class="sync-status connected" id="syncStatus">
+                <i class="fas fa-cloud"></i>
+                <span>Connected to Google Sheets - Real-time collaboration enabled!</span>
+            </div>
             <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; margin-bottom: 15px;">
-                Since we're using different devices, export/import the wishlist to stay synchronized!
+                Any changes you make will automatically sync to Mercy's device, and vice versa!
             </p>
             <div class="sync-buttons">
                 <button class="sync-btn sync-export" onclick="exportWishlist()">
-                    <i class="fas fa-download"></i> Export My List
+                    <i class="fas fa-download"></i> Export Backup
                 </button>
                 <button class="sync-btn sync-import" onclick="importWishlist()">
-                    <i class="fas fa-upload"></i> Import Their List
+                    <i class="fas fa-upload"></i> Import Backup
                 </button>
-                <button class="sync-btn sync-email" onclick="showEmailModal()">
-                    <i class="fas fa-envelope"></i> Email to Mercy
+                <button class="sync-btn" onclick="manualSync()" style="background: linear-gradient(to right, #4CAF50, #2E7D32);">
+                    <i class="fas fa-sync-alt"></i> Sync Now
                 </button>
             </div>
         </section>
@@ -770,22 +741,6 @@
         </section>
     </main>
 
-    <!-- Email Modal -->
-    <div class="email-modal" id="emailModal">
-        <div class="email-modal-content">
-            <h3><i class="fas fa-envelope"></i> Email Wishlist to Mercy</h3>
-            <input type="email" id="emailInput" class="email-input" placeholder="Enter Mercy's email address" value="mettmwamba@gmail.com">
-            <div class="email-buttons">
-                <button class="email-btn email-send" onclick="emailWishlist()">
-                    <i class="fas fa-paper-plane"></i> Send Email
-                </button>
-                <button class="email-btn email-cancel" onclick="hideEmailModal()">
-                    <i class="fas fa-times"></i> Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Sync Notification -->
     <div class="sync-notification" id="syncNotification">
         <i class="fas fa-sync"></i>
@@ -796,609 +751,591 @@
     <div class="floating-hearts-bg"></div>
 
     <script>
-    // Wishlist Data Management
-    let wishes = [];
-    let currentFilter = 'all';
-    let currentPriority = 'medium';
-    let emptyStateElement = null;
+        // Collaborative Wishlist using YOUR Google Sheet
+        const GOOGLE_SHEET_ID = '1Z4tzOHNY5FzNKGZJZrJX2Nep7Q6IJOsapS4tLd0Mijs';
+        const SHEET_NAME = 'Wishlist';
+        
+        // Google Apps Script Web App URL (I'll create this for you)
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw9lJxIYlq3IDe13rWcN8iM_bjgLcCF0UXXB_YgPhzM4wJXv5AFmRS_1wzw43vSgAmS/exec';
+        
+        let wishes = [];
+        let currentFilter = 'all';
+        let currentPriority = 'medium';
+        let emptyStateElement = null;
+        let isSyncing = false;
+        let syncInterval = null;
 
-    // Initialize wishlist
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Wishlist loading...');
-        
-        // Get empty state element once
-        emptyStateElement = document.getElementById('emptyState');
-        
-        // Initialize
-        loadWishlist();
-        initForm();
-        initFilters();
-        initMobileMenu();
-        
-        // Hide preloader after 2 seconds
-        setTimeout(() => {
-            document.getElementById('preloader').classList.add('hidden');
-        }, 2000);
-        
-        // Check for shared data in URL
-        checkForSharedData();
-    });
-
-    // Load wishlist from localStorage
-    function loadWishlist() {
-        const savedWishes = localStorage.getItem('ourWishlist');
-        if (savedWishes) {
-            wishes = JSON.parse(savedWishes);
-            console.log(`Loaded ${wishes.length} wishes from storage`);
-        } else {
-            // Add some sample wishes if empty
-            wishes = [
-                {
-                    id: 1,
-                    title: 'Weekend Getaway',
-                    description: 'A romantic weekend at a beach resort',
-                    price: '$500',
-                    priority: 'high',
-                    addedBy: 'methuselah',
-                    date: new Date().toISOString(),
-                    fulfilled: false
-                },
-                {
-                    id: 2,
-                    title: 'Smart Watch',
-                    description: 'To track fitness and health metrics',
-                    price: '$300',
-                    priority: 'medium',
-                    addedBy: 'mercy',
-                    date: new Date().toISOString(),
-                    fulfilled: false
-                },
-                {
-                    id: 3,
-                    title: 'Photo Album',
-                    description: 'Printed album of our favorite memories',
-                    price: '$50',
-                    priority: 'low',
-                    addedBy: 'methuselah',
-                    date: new Date().toISOString(),
-                    fulfilled: false
-                }
-            ];
-            saveWishlist();
-        }
-        
-        updateStats();
-        renderWishlist();
-    }
-
-    // Save wishlist to localStorage
-    function saveWishlist() {
-        localStorage.setItem('ourWishlist', JSON.stringify(wishes));
-        console.log(`Saved ${wishes.length} wishes to storage`);
-        showSyncNotification('Wishlist saved successfully!');
-    }
-
-    // Initialize form
-    function initForm() {
-        const form = document.getElementById('wishForm');
-        const priorityButtons = document.querySelectorAll('.priority-btn');
-        
-        // Priority buttons
-        priorityButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                priorityButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                currentPriority = this.dataset.priority;
-                document.getElementById('wishPriority').value = currentPriority;
-            });
+        // Initialize wishlist
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Collaborative Wishlist loading...');
+            
+            // Get empty state element once
+            emptyStateElement = document.getElementById('emptyState');
+            
+            // Initialize
+            initForm();
+            initFilters();
+            initMobileMenu();
+            
+            // Load initial data
+            loadWishlistFromGoogleSheets();
+            
+            // Hide preloader after 2 seconds
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 2000);
+            
+            // Set up auto-sync every 30 seconds
+            syncInterval = setInterval(loadWishlistFromGoogleSheets, 30000);
         });
-        
-        // Form submission
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const title = document.getElementById('wishTitle').value.trim();
-            const description = document.getElementById('wishDescription').value.trim();
-            const price = document.getElementById('wishPrice').value.trim() || 'Flexible';
-            const addedBy = document.getElementById('wishAddedBy').value;
-            const priority = document.getElementById('wishPriority').value;
-            
-            if (!title) {
-                alert('Please enter a wish title!');
-                return;
-            }
-            
-            // Create new wish
-            const newWish = {
-                id: Date.now(), // Unique ID
-                title: title,
-                description: description,
-                price: price,
-                priority: priority,
-                addedBy: addedBy,
-                date: new Date().toISOString(),
-                fulfilled: false
-            };
-            
-            // Add to wishlist
-            wishes.unshift(newWish); // Add to beginning
-            saveWishlist();
-            updateStats();
-            renderWishlist();
-            
-            // Reset form
-            form.reset();
-            document.getElementById('wishPriority').value = 'medium';
-            priorityButtons.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.priority === 'medium') {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Celebration
-            createHearts(5);
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 50,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
-            }
-            
-            // Focus back on title input
-            document.getElementById('wishTitle').focus();
-        });
-    }
 
-    // Initialize filters
-    function initFilters() {
-        const filterTabs = document.querySelectorAll('.filter-tab');
-        
-        filterTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                filterTabs.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                currentFilter = this.dataset.filter;
-                renderWishlist();
-            });
-        });
-    }
-
-    // Render wishlist - FIXED VERSION
-    function renderWishlist() {
-        const grid = document.getElementById('wishlistGrid');
-        
-        // Clear grid but preserve empty state element
-        while (grid.firstChild && grid.firstChild.id !== 'emptyState') {
-            grid.removeChild(grid.firstChild);
-        }
-        
-        // If empty state doesn't exist in grid, add it
-        if (!grid.contains(emptyStateElement)) {
-            grid.appendChild(emptyStateElement);
-        }
-        
-        // Filter wishes
-        let filteredWishes = [...wishes];
-        
-        switch (currentFilter) {
-            case 'mercy':
-                filteredWishes = wishes.filter(w => w.addedBy === 'mercy');
-                break;
-            case 'methuselah':
-                filteredWishes = wishes.filter(w => w.addedBy === 'methuselah');
-                break;
-            case 'high':
-                filteredWishes = wishes.filter(w => w.priority === 'high');
-                break;
-            case 'low':
-                filteredWishes = wishes.filter(w => w.priority === 'low');
-                break;
-            case 'fulfilled':
-                filteredWishes = wishes.filter(w => w.fulfilled);
-                break;
-        }
-        
-        // Show empty state if no wishes
-        if (filteredWishes.length === 0) {
-            emptyStateElement.style.display = 'block';
-            return;
-        }
-        
-        // Hide empty state
-        emptyStateElement.style.display = 'none';
-        
-        // Create wish cards
-        filteredWishes.forEach(wish => {
-            const card = createWishCard(wish);
-            grid.insertBefore(card, emptyStateElement);
-        });
-    }
-
-    // Create wish card element
-    function createWishCard(wish) {
-        const card = document.createElement('div');
-        card.className = 'wish-card';
-        card.dataset.id = wish.id;
-        
-        // Format date
-        const date = new Date(wish.date);
-        const dateStr = date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-        });
-        
-        // Priority class
-        const priorityClass = `priority-${wish.priority}`;
-        const priorityText = wish.priority.charAt(0).toUpperCase() + wish.priority.slice(1);
-        
-        // Added by class
-        const addedByClass = wish.addedBy;
-        const addedByName = wish.addedBy === 'mercy' ? 'Mercy' : 'Methuselah';
-        const addedByIcon = wish.addedBy === 'mercy' ? 'fas fa-heart' : 'fas fa-star';
-        
-        card.innerHTML = `
-            <div class="wish-header">
-                <h3 class="wish-title">${wish.title}</h3>
-                <span class="priority-tag ${priorityClass}">${priorityText}</span>
-            </div>
+        // Load wishlist from Google Sheets
+        async function loadWishlistFromGoogleSheets() {
+            if (isSyncing) return;
             
-            ${wish.description ? `<p class="wish-description">${wish.description}</p>` : ''}
+            isSyncing = true;
+            updateSyncStatus('syncing', 'Syncing with Google Sheets...');
             
-            <div class="wish-footer">
-                <div class="wish-meta">
-                    <span class="price-tag">${wish.price}</span>
-                    <span class="added-by ${addedByClass}">
-                        <i class="${addedByIcon}"></i> ${addedByName}
-                    </span>
-                    <span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
-                        <i class="fas fa-calendar"></i> ${dateStr}
-                    </span>
-                </div>
+            try {
+                const url = `${GOOGLE_SCRIPT_URL}?action=get&sheetId=${GOOGLE_SHEET_ID}&sheetName=${SHEET_NAME}`;
+                const response = await fetch(url);
                 
-                <div class="wish-actions">
-                    ${wish.fulfilled ? 
-                        `<button class="action-btn" onclick="toggleFulfill(${wish.id})" title="Mark as unfulfilled">
-                            <i class="fas fa-check-circle" style="color: #00ff00;"></i>
-                        </button>` :
-                        `<button class="action-btn" onclick="toggleFulfill(${wish.id})" title="Mark as fulfilled">
-                            <i class="far fa-check-circle"></i>
-                        </button>`
-                    }
-                    <button class="action-btn" onclick="deleteWish(${wish.id})" title="Delete wish">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        // Add fulfilled style
-        if (wish.fulfilled) {
-            card.style.opacity = '0.7';
-            card.style.border = '1px solid rgba(0, 255, 0, 0.3)';
-            card.querySelector('.wish-title').innerHTML = `${wish.title} <i class="fas fa-check" style="color: #00ff00; margin-left: 5px;"></i>`;
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success && Array.isArray(data.data)) {
+                    // Convert spreadsheet rows to wish objects
+                    wishes = data.data.map(row => {
+                        // row format: [id, title, description, price, priority, addedBy, date, fulfilled]
+                        return {
+                            id: row[0] || Date.now(),
+                            title: row[1] || '',
+                            description: row[2] || '',
+                            price: row[3] || 'Flexible',
+                            priority: row[4] || 'medium',
+                            addedBy: row[5] || 'unknown',
+                            date: row[6] || new Date().toISOString(),
+                            fulfilled: row[7] === 'TRUE' || row[7] === true
+                        };
+                    });
+                    
+                    console.log(`Loaded ${wishes.length} wishes from Google Sheets`);
+                    updateStats();
+                    renderWishlist();
+                    updateLastSync();
+                    updateSyncStatus('connected', 'Connected to shared wishlist!');
+                    
+                } else {
+                    throw new Error(data.error || 'Invalid data format');
+                }
+                
+            } catch (error) {
+                console.error('Error loading from Google Sheets:', error);
+                updateSyncStatus('error', 'Sync failed. Using local cache.');
+                
+                // Fallback to localStorage cache
+                const cachedWishes = localStorage.getItem('wishlistCache');
+                if (cachedWishes) {
+                    wishes = JSON.parse(cachedWishes);
+                    updateStats();
+                    renderWishlist();
+                }
+            } finally {
+                isSyncing = false;
+            }
         }
-        
-        return card;
-    }
 
-    // Update statistics
-    function updateStats() {
-        const totalWishes = wishes.length;
-        const mercyWishes = wishes.filter(w => w.addedBy === 'mercy').length;
-        const methuselahWishes = wishes.filter(w => w.addedBy === 'methuselah').length;
-        
-        document.getElementById('totalWishes').textContent = totalWishes;
-        document.getElementById('mercyWishes').textContent = mercyWishes;
-        document.getElementById('methuselahWishes').textContent = methuselahWishes;
-    }
-
-    // Toggle fulfill status
-    function toggleFulfill(id) {
-        const wishIndex = wishes.findIndex(w => w.id === id);
-        if (wishIndex !== -1) {
-            wishes[wishIndex].fulfilled = !wishes[wishIndex].fulfilled;
-            saveWishlist();
-            renderWishlist();
+        // Save wishlist to Google Sheets
+        async function saveWishlistToGoogleSheets() {
+            if (isSyncing) return;
             
-            // Celebration if fulfilled
-            if (wishes[wishIndex].fulfilled) {
-                createHearts(10);
+            isSyncing = true;
+            updateSyncStatus('syncing', 'Saving to Google Sheets...');
+            
+            try {
+                // Convert wishes to spreadsheet rows
+                const rows = wishes.map(wish => [
+                    wish.id,
+                    wish.title,
+                    wish.description,
+                    wish.price,
+                    wish.priority,
+                    wish.addedBy,
+                    wish.date,
+                    wish.fulfilled ? 'TRUE' : 'FALSE'
+                ]);
+                
+                const url = `${GOOGLE_SCRIPT_URL}?action=save&sheetId=${GOOGLE_SHEET_ID}&sheetName=${SHEET_NAME}`;
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ data: rows })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Cache locally
+                    localStorage.setItem('wishlistCache', JSON.stringify(wishes));
+                    updateLastSync();
+                    updateSyncStatus('connected', 'Saved to Google Sheets!');
+                    showNotification('Changes saved to cloud! ✨');
+                } else {
+                    throw new Error(result.error || 'Save failed');
+                }
+                
+            } catch (error) {
+                console.error('Error saving to Google Sheets:', error);
+                updateSyncStatus('error', 'Save failed. Changes cached locally.');
+                showNotification('⚠️ Changes saved locally only');
+            } finally {
+                isSyncing = false;
+            }
+        }
+
+        // Initialize form
+        function initForm() {
+            const form = document.getElementById('wishForm');
+            const priorityButtons = document.querySelectorAll('.priority-btn');
+            
+            // Priority buttons
+            priorityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    priorityButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentPriority = this.dataset.priority;
+                    document.getElementById('wishPriority').value = currentPriority;
+                });
+            });
+            
+            // Form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('wishTitle').value.trim();
+                const description = document.getElementById('wishDescription').value.trim();
+                const price = document.getElementById('wishPrice').value.trim() || 'Flexible';
+                const addedBy = document.getElementById('wishAddedBy').value;
+                const priority = document.getElementById('wishPriority').value;
+                
+                if (!title) {
+                    showNotification('Please enter a wish title!', 'error');
+                    return;
+                }
+                
+                // Create new wish
+                const newWish = {
+                    id: Date.now(), // Unique ID
+                    title: title,
+                    description: description,
+                    price: price,
+                    priority: priority,
+                    addedBy: addedBy,
+                    date: new Date().toISOString(),
+                    fulfilled: false
+                };
+                
+                // Add to local array
+                wishes.unshift(newWish);
+                updateStats();
+                renderWishlist();
+                
+                // Save to Google Sheets
+                await saveWishlistToGoogleSheets();
+                
+                // Reset form
+                form.reset();
+                document.getElementById('wishPriority').value = 'medium';
+                priorityButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.priority === 'medium') {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                // Celebration
+                createHearts(5);
                 if (typeof confetti === 'function') {
                     confetti({
-                        particleCount: 100,
+                        particleCount: 50,
                         spread: 70,
                         origin: { y: 0.6 }
                     });
                 }
-                showSyncNotification(`🎉 "${wishes[wishIndex].title}" marked as fulfilled!`);
-            }
-        }
-    }
-
-    // Delete wish - FIXED VERSION
-    function deleteWish(id) {
-        if (confirm('Are you sure you want to delete this wish?')) {
-            const wishIndex = wishes.findIndex(w => w.id === id);
-            if (wishIndex !== -1) {
-                const wishTitle = wishes[wishIndex].title;
-                wishes.splice(wishIndex, 1);
-                saveWishlist();
-                updateStats();
-                renderWishlist();
                 
-                // Create floating heart
-                createHearts(3);
-                
-                showSyncNotification(`"${wishTitle}" has been deleted.`);
-            }
+                // Focus back on title
+                document.getElementById('wishTitle').focus();
+            });
         }
-    }
 
-    // Show sync notification
-    function showSyncNotification(message = 'Wishlist saved successfully!') {
-        const notification = document.getElementById('syncNotification');
-        const messageEl = document.getElementById('syncMessage');
-        
-        messageEl.textContent = message;
-        notification.style.display = 'flex';
-        
-        setTimeout(() => {
-            notification.style.display = 'none';
-        }, 3000);
-    }
-
-    // Export wishlist
-    function exportWishlist() {
-        // Format the data nicely
-        const exportData = {
-            timestamp: new Date().toISOString(),
-            totalWishes: wishes.length,
-            wishes: wishes
-        };
-        
-        const dataStr = JSON.stringify(exportData, null, 2);
-        const dataBlob = new Blob([dataStr], { type: 'application/json' });
-        
-        // Create download link
-        const downloadLink = document.createElement('a');
-        const url = URL.createObjectURL(dataBlob);
-        downloadLink.href = url;
-        downloadLink.download = `Our-Wishlist-${new Date().toISOString().split('T')[0]}.json`;
-        
-        // Trigger download
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        URL.revokeObjectURL(url);
-        
-        showSyncNotification('Wishlist exported successfully!');
-        
-        // Also show the data for copy-paste
-        setTimeout(() => {
-            const shouldCopy = confirm('Export successful! Would you like to copy the data to clipboard to share via WhatsApp/Message?');
-            if (shouldCopy) {
-                navigator.clipboard.writeText(dataStr).then(() => {
-                    alert('Wishlist data copied to clipboard! 📋\n\nYou can now paste it in a message to share.');
+        // Initialize filters
+        function initFilters() {
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    renderWishlist();
                 });
-            }
-        }, 500);
-    }
-
-    // Import wishlist
-    function importWishlist() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.json,.txt';
-        
-        input.onchange = function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                try {
-                    const importedData = JSON.parse(e.target.result);
-                    
-                    // Handle different import formats
-                    let importedWishes = [];
-                    if (Array.isArray(importedData)) {
-                        // Direct array of wishes
-                        importedWishes = importedData;
-                    } else if (importedData.wishes && Array.isArray(importedData.wishes)) {
-                        // Our export format
-                        importedWishes = importedData.wishes;
-                    } else {
-                        throw new Error('Invalid wishlist format');
-                    }
-                    
-                    if (importedWishes.length === 0) {
-                        alert('The imported file contains no wishes.');
-                        return;
-                    }
-                    
-                    const shouldReplace = confirm(`Found ${importedWishes.length} wishes. Replace current list or merge?`);
-                    
-                    if (shouldReplace) {
-                        // Replace current list
-                        wishes = importedWishes;
-                    } else {
-                        // Merge lists
-                        const existingIds = wishes.map(w => w.id);
-                        importedWishes.forEach(wish => {
-                            if (!existingIds.includes(wish.id)) {
-                                wishes.push(wish);
-                            }
-                        });
-                    }
-                    
-                    saveWishlist();
-                    updateStats();
-                    renderWishlist();
-                    
-                    showSyncNotification(`Successfully imported ${importedWishes.length} wishes! ✨`);
-                    
-                } catch (error) {
-                    alert('Error importing wishlist: ' + error.message + '\n\nPlease make sure you are importing a valid wishlist file.');
-                }
-            };
-            
-            reader.readAsText(file);
-        };
-        
-        input.click();
-    }
-
-    // Email wishlist
-    function showEmailModal() {
-        document.getElementById('emailModal').style.display = 'flex';
-        document.getElementById('emailInput').focus();
-    }
-    
-    function hideEmailModal() {
-        document.getElementById('emailModal').style.display = 'none';
-    }
-    
-    function emailWishlist() {
-        const email = document.getElementById('emailInput').value.trim();
-        if (!email || !email.includes('@')) {
-            alert('Please enter a valid email address.');
-            return;
+            });
         }
-        
-        // Create email content
-        const date = new Date().toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-        
-        let emailBody = `Our Gift Wishlist - ${date}\n\n`;
-        emailBody += `Total Wishes: ${wishes.length}\n`;
-        emailBody += `Mercy's Wishes: ${wishes.filter(w => w.addedBy === 'mercy').length}\n`;
-        emailBody += `Methuselah's Wishes: ${wishes.filter(w => w.addedBy === 'methuselah').length}\n\n`;
-        
-        emailBody += "📋 OUR WISHLIST:\n";
-        emailBody += "=".repeat(50) + "\n\n";
-        
-        wishes.forEach((wish, index) => {
-            const fulfilled = wish.fulfilled ? '✅ ' : '';
-            const addedBy = wish.addedBy === 'mercy' ? 'Mercy' : 'Methuselah';
-            emailBody += `${index + 1}. ${fulfilled}${wish.title}\n`;
-            emailBody += `   💰 ${wish.price} | ⚡ ${wish.priority.toUpperCase()} | 👤 ${addedBy}\n`;
-            if (wish.description) {
-                emailBody += `   📝 ${wish.description}\n`;
-            }
-            emailBody += "\n";
-        });
-        
-        emailBody += "\n💝 Love always,\n";
-        emailBody += "Methuselah\n\n";
-        emailBody += "P.S. You can import this list by copying the JSON data from the website!";
-        
-        // Create mailto link
-        const subject = `Our Gift Wishlist - ${date}`;
-        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-        
-        // Open email client
-        window.location.href = mailtoLink;
-        
-        hideEmailModal();
-        showSyncNotification('Opening email client... 📧');
-    }
 
-    // Check for shared data in URL
-    function checkForSharedData() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const sharedData = urlParams.get('wishlist');
-        
-        if (sharedData) {
-            try {
-                const decodedData = atob(sharedData);
-                const sharedWishes = JSON.parse(decodedData);
+        // Render wishlist
+        function renderWishlist() {
+            const grid = document.getElementById('wishlistGrid');
+            
+            // Clear grid but preserve empty state element
+            while (grid.firstChild && grid.firstChild.id !== 'emptyState') {
+                grid.removeChild(grid.firstChild);
+            }
+            
+            // If empty state doesn't exist in grid, add it
+            if (!grid.contains(emptyStateElement)) {
+                grid.appendChild(emptyStateElement);
+            }
+            
+            // Filter wishes
+            let filteredWishes = [...wishes];
+            
+            switch (currentFilter) {
+                case 'mercy':
+                    filteredWishes = wishes.filter(w => w.addedBy === 'mercy');
+                    break;
+                case 'methuselah':
+                    filteredWishes = wishes.filter(w => w.addedBy === 'methuselah');
+                    break;
+                case 'high':
+                    filteredWishes = wishes.filter(w => w.priority === 'high');
+                    break;
+                case 'low':
+                    filteredWishes = wishes.filter(w => w.priority === 'low');
+                    break;
+                case 'fulfilled':
+                    filteredWishes = wishes.filter(w => w.fulfilled);
+                    break;
+            }
+            
+            // Show empty state if no wishes
+            if (filteredWishes.length === 0) {
+                emptyStateElement.style.display = 'block';
+                return;
+            }
+            
+            // Hide empty state
+            emptyStateElement.style.display = 'none';
+            
+            // Create wish cards
+            filteredWishes.forEach(wish => {
+                const card = createWishCard(wish);
+                grid.insertBefore(card, emptyStateElement);
+            });
+        }
+
+        // Create wish card element
+        function createWishCard(wish) {
+            const card = document.createElement('div');
+            card.className = 'wish-card';
+            card.dataset.id = wish.id;
+            
+            // Format date
+            const date = new Date(wish.date);
+            const dateStr = date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+            
+            // Priority class
+            const priorityClass = `priority-${wish.priority}`;
+            const priorityText = wish.priority.charAt(0).toUpperCase() + wish.priority.slice(1);
+            
+            // Added by class
+            const addedByClass = wish.addedBy;
+            const addedByName = wish.addedBy === 'mercy' ? 'Mercy' : 'Methuselah';
+            const addedByIcon = wish.addedBy === 'mercy' ? 'fas fa-heart' : 'fas fa-star';
+            
+            card.innerHTML = `
+                <div class="wish-header">
+                    <h3 class="wish-title">${wish.title}</h3>
+                    <span class="priority-tag ${priorityClass}">${priorityText}</span>
+                </div>
                 
-                if (confirm('Found shared wishlist data! Would you like to import it?')) {
-                    wishes = sharedWishes;
-                    saveWishlist();
-                    updateStats();
-                    renderWishlist();
-                    showSyncNotification('Shared wishlist imported successfully!');
+                ${wish.description ? `<p class="wish-description">${wish.description}</p>` : ''}
+                
+                <div class="wish-footer">
+                    <div class="wish-meta">
+                        <span class="price-tag">${wish.price}</span>
+                        <span class="added-by ${addedByClass}">
+                            <i class="${addedByIcon}"></i> ${addedByName}
+                        </span>
+                        <span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+                            <i class="fas fa-calendar"></i> ${dateStr}
+                        </span>
+                    </div>
                     
-                    // Clean URL
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                }
-            } catch (error) {
-                console.error('Error parsing shared data:', error);
-            }
-        }
-    }
-
-    // Create floating hearts
-    function createHearts(count) {
-        let container = document.querySelector('.floating-hearts-bg');
-        if (!container) {
-            container = document.createElement('div');
-            container.className = 'floating-hearts-bg';
-            document.body.appendChild(container);
-        }
-        
-        for (let i = 0; i < count; i++) {
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = '❤️';
-            heart.style.cssText = `
-                position: fixed;
-                left: ${Math.random() * 100}vw;
-                top: ${100 + Math.random() * 20}vh;
-                font-size: ${15 + Math.random() * 25}px;
-                opacity: 0;
-                animation: floatUp ${3 + Math.random() * 7}s linear forwards;
-                animation-delay: ${Math.random() * 2}s;
-                z-index: 9998;
+                    <div class="wish-actions">
+                        ${wish.fulfilled ? 
+                            `<button class="action-btn" onclick="toggleFulfill(${wish.id})" title="Mark as unfulfilled">
+                                <i class="fas fa-check-circle" style="color: #00ff00;"></i>
+                            </button>` :
+                            `<button class="action-btn" onclick="toggleFulfill(${wish.id})" title="Mark as fulfilled">
+                                <i class="far fa-check-circle"></i>
+                            </button>`
+                        }
+                        <button class="action-btn" onclick="deleteWish(${wish.id})" title="Delete wish">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
             `;
             
-            container.appendChild(heart);
+            // Add fulfilled style
+            if (wish.fulfilled) {
+                card.style.opacity = '0.7';
+                card.style.border = '1px solid rgba(0, 255, 0, 0.3)';
+                card.querySelector('.wish-title').innerHTML = `${wish.title} <i class="fas fa-check" style="color: #00ff00; margin-left: 5px;"></i>`;
+            }
+            
+            return card;
+        }
+
+        // Update statistics
+        function updateStats() {
+            const totalWishes = wishes.length;
+            const mercyWishes = wishes.filter(w => w.addedBy === 'mercy').length;
+            const methuselahWishes = wishes.filter(w => w.addedBy === 'methuselah').length;
+            
+            document.getElementById('totalWishes').textContent = totalWishes;
+            document.getElementById('mercyWishes').textContent = mercyWishes;
+            document.getElementById('methuselahWishes').textContent = methuselahWishes;
+        }
+
+        // Update sync status
+        function updateSyncStatus(status, message) {
+            const statusEl = document.getElementById('syncStatus');
+            statusEl.className = `sync-status ${status}`;
+            statusEl.innerHTML = `<i class="fas fa-${status === 'connected' ? 'cloud' : 'sync-alt'}"></i> <span>${message}</span>`;
+        }
+
+        // Update last sync time
+        function updateLastSync() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('lastSync').textContent = timeStr;
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('syncNotification');
+            const messageEl = document.getElementById('syncMessage');
+            
+            messageEl.textContent = message;
+            notification.style.display = 'flex';
+            notification.style.background = type === 'error' 
+                ? 'linear-gradient(to right, #ff6b8b, #c2185b)' 
+                : 'linear-gradient(to right, #ff6b8b, #8a2be2)';
             
             setTimeout(() => {
-                if (heart.parentNode === container) {
-                    container.removeChild(heart);
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Toggle fulfill status
+        async function toggleFulfill(id) {
+            const wishIndex = wishes.findIndex(w => w.id === id);
+            if (wishIndex !== -1) {
+                wishes[wishIndex].fulfilled = !wishes[wishIndex].fulfilled;
+                renderWishlist();
+                
+                // Save to Google Sheets
+                await saveWishlistToGoogleSheets();
+                
+                if (wishes[wishIndex].fulfilled) {
+                    createHearts(10);
+                    if (typeof confetti === 'function') {
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                    }
+                    showNotification(`🎉 "${wishes[wishIndex].title}" marked as fulfilled!`);
                 }
-            }, 10000);
+            }
         }
-    }
 
-    function initMobileMenu() {
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if (menuToggle && navLinks) {
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                menuToggle.innerHTML = navLinks.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
+        // Delete wish
+        async function deleteWish(id) {
+            if (confirm('Are you sure you want to delete this wish?')) {
+                const wishIndex = wishes.findIndex(w => w.id === id);
+                if (wishIndex !== -1) {
+                    const wishTitle = wishes[wishIndex].title;
+                    wishes.splice(wishIndex, 1);
+                    updateStats();
+                    renderWishlist();
+                    
+                    // Save to Google Sheets
+                    await saveWishlistToGoogleSheets();
+                    
+                    createHearts(3);
+                    showNotification(`"${wishTitle}" has been deleted.`);
+                }
+            }
+        }
+
+        // Manual sync
+        async function manualSync() {
+            await loadWishlistFromGoogleSheets();
+            showNotification('Manual sync completed!');
+        }
+
+        // Export wishlist
+        function exportWishlist() {
+            const exportData = {
+                timestamp: new Date().toISOString(),
+                totalWishes: wishes.length,
+                wishes: wishes
+            };
             
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                });
-            });
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const downloadLink = document.createElement('a');
+            const url = URL.createObjectURL(dataBlob);
+            downloadLink.href = url;
+            downloadLink.download = `Our-Wishlist-Backup-${new Date().toISOString().split('T')[0]}.json`;
+            
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(url);
+            
+            showNotification('Wishlist exported successfully!');
         }
-    }
 
-    // Create initial hearts
-    setTimeout(() => {
-        createHearts(5);
-    }, 1000);
-    
-    // Keep creating hearts
-    setInterval(() => {
-        createHearts(1);
-    }, 5000);
-</script>
+        // Import wishlist
+        async function importWishlist() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json,.txt';
+            
+            input.onchange = async function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                
+                reader.onload = async function(e) {
+                    try {
+                        const importedData = JSON.parse(e.target.result);
+                        let importedWishes = [];
+                        
+                        if (Array.isArray(importedData)) {
+                            importedWishes = importedData;
+                        } else if (importedData.wishes && Array.isArray(importedData.wishes)) {
+                            importedWishes = importedData.wishes;
+                        } else {
+                            throw new Error('Invalid wishlist format');
+                        }
+                        
+                        if (importedWishes.length === 0) {
+                            showNotification('No wishes found in file.', 'error');
+                            return;
+                        }
+                        
+                        if (confirm(`Import ${importedWishes.length} wishes? This will replace current list.`)) {
+                            wishes = importedWishes;
+                            renderWishlist();
+                            updateStats();
+                            
+                            // Save to Google Sheets
+                            await saveWishlistToGoogleSheets();
+                            
+                            showNotification(`Successfully imported ${importedWishes.length} wishes! ✨`);
+                        }
+                    } catch (error) {
+                        showNotification('Error importing: ' + error.message, 'error');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+
+        // Create floating hearts
+        function createHearts(count) {
+            let container = document.querySelector('.floating-hearts-bg');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'floating-hearts-bg';
+                document.body.appendChild(container);
+            }
+            
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤️';
+                heart.style.cssText = `
+                    position: fixed;
+                    left: ${Math.random() * 100}vw;
+                    top: ${100 + Math.random() * 20}vh;
+                    font-size: ${15 + Math.random() * 25}px;
+                    opacity: 0;
+                    animation: floatUp ${3 + Math.random() * 7}s linear forwards;
+                    animation-delay: ${Math.random() * 2}s;
+                    z-index: 9998;
+                `;
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heart.parentNode === container) {
+                        container.removeChild(heart);
+                    }
+                }, 10000);
+            }
+        }
+
+        function initMobileMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    menuToggle.innerHTML = navLinks.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+            }
+        }
+
+        // Create initial hearts
+        setTimeout(() => {
+            createHearts(5);
+        }, 1000);
+        
+        // Keep creating hearts
+        setInterval(() => {
+            createHearts(1);
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Gift Wishlist ❤️ - For Mercy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Wishlist specific styles */
+        .wishlist-main {
+            padding-top: 80px;
+        }
+        
+        .wishlist-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 139, 0.1), rgba(138, 43, 226, 0.1));
+        }
+        
+        .wishlist-header h1 {
+            font-size: 3rem;
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .couple-avatars {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .vs-separator {
+            font-size: 1.5rem;
+            color: #ff6b8b;
+            font-weight: bold;
+        }
+        
+        .wishlist-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .stat i {
+            font-size: 2rem;
+            color: #ff6b8b;
+            margin-bottom: 10px;
+        }
+        
+        .stat span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .stat small {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .sync-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sync-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .sync-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .sync-export {
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+        }
+        
+        .sync-import {
+            background: linear-gradient(to right, #00d4ff, #0077ff);
+        }
+        
+        .sync-email {
+            background: linear-gradient(to right, #34d399, #10b981);
+        }
+        
+        .sync-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .add-wish-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto 40px;
+        }
+        
+        .form-title {
+            text-align: center;
+            color: #ff6b8b;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ff6b8b;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .priority-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .priority-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .priority-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .priority-btn.active {
+            border-color: #ff6b8b;
+            background: rgba(255, 107, 139, 0.2);
+            color: white;
+        }
+        
+        .add-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .add-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 139, 0.3);
+        }
+        
+        .wishlist-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+        }
+        
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .wish-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .wish-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 139, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .wish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .wish-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .priority-tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .priority-high {
+            background: rgba(255, 107, 139, 0.2);
+            color: #ff6b8b;
+            border: 1px solid rgba(255, 107, 139, 0.3);
+        }
+        
+        .priority-medium {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        .priority-low {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .wish-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .wish-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .wish-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .price-tag {
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .added-by {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .added-by.methuselah {
+            color: #ff6b8b;
+        }
+        
+        .added-by.mercy {
+            color: #8a2be2;
+        }
+        
+        .wish-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: #ff6b8b;
+            transform: scale(1.1);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            color: #ff6b8b;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .empty-state p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+        }
+        
+        .back-home {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .back-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 139, 0.3);
+        }
+        
+        .sync-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .email-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10001;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .email-modal-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .email-modal h3 {
+            color: #ff6b8b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .email-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .email-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .email-btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .email-send {
+            background: linear-gradient(to right, #ff6b8b, #8a2be2);
+        }
+        
+        .email-cancel {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .love-quote {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .love-quote p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+        
+        .signature {
+            color: #ff6b8b;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .wishlist-header h1 {
+                font-size: 2rem;
+            }
+            
+            .couple-avatars {
+                gap: 10px;
+            }
+            
+            .avatar {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .wishlist-stats {
+                gap: 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .wish-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .wish-actions {
+                align-self: flex-end;
+            }
+            
+            .sync-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="heart-loader">
+                <div class="heart-piece"></div>
+                <div class="heart-piece"></div>
+                <div class="heart-piece"></div>
+            </div>
+            <h2 class="loading-text">Loading Our Gift Wishlist...</h2>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="romantic-quotes">
+                <p class="active">"Making wishes together"</p>
+                <p>"Dreaming of our future"</p>
+                <p>"Every wish is a promise"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Back to Home</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#story" class="nav-link"><i class="fas fa-book-heart"></i> Our Story</a>
+                <a href="index.html#gallery" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+                <a href="index.html#music" class="nav-link"><i class="fas fa-music"></i> Our Songs</a>
+                <a href="index.html#messages" class="nav-link"><i class="fas fa-envelope"></i> Love Notes</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="wishlist-main">
+        <!-- Wishlist Header -->
+        <section class="wishlist-header">
+            <h1>Our Gift Wishlist 💝</h1>
+            <p>Things we dream of having together. Add your wishes and I'll add mine!</p>
+            
+            <div class="couple-avatars">
+                <div class="avatar">
+                    <img src="gallery/favorite.jpg" alt="Mercy" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                </div>
+                <div class="vs-separator">❤️</div>
+                <div class="avatar">
+                    <img src="gallery/wow.jpg" alt="Methuselah" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'">
+                </div>
+            </div>
+            
+            <div class="wishlist-stats">
+                <div class="stat">
+                    <i class="fas fa-gift"></i>
+                    <span id="totalWishes">0</span>
+                    <small>Total Wishes</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-heart"></i>
+                    <span id="mercyWishes">0</span>
+                    <small>Mercy's Wishes</small>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-star"></i>
+                    <span id="methuselahWishes">0</span>
+                    <small>Methuselah's Wishes</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sync Section -->
+        <section class="sync-section">
+            <h3 style="color: #00d4ff; margin-bottom: 10px;">
+                <i class="fas fa-sync-alt"></i> Keep in Sync
+            </h3>
+            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; margin-bottom: 15px;">
+                Since we're using different devices, export/import the wishlist to stay synchronized!
+            </p>
+            <div class="sync-buttons">
+                <button class="sync-btn sync-export" onclick="exportWishlist()">
+                    <i class="fas fa-download"></i> Export My List
+                </button>
+                <button class="sync-btn sync-import" onclick="importWishlist()">
+                    <i class="fas fa-upload"></i> Import Their List
+                </button>
+                <button class="sync-btn sync-email" onclick="showEmailModal()">
+                    <i class="fas fa-envelope"></i> Email to Mercy
+                </button>
+            </div>
+        </section>
+
+        <!-- Add Wish Form -->
+        <section class="add-wish-form">
+            <h3 class="form-title"><i class="fas fa-plus-circle"></i> Add a New Wish</h3>
+            <form id="wishForm">
+                <div class="form-group">
+                    <label for="wishTitle"><i class="fas fa-tag"></i> What do you wish for?</label>
+                    <input type="text" id="wishTitle" placeholder="Enter wish title (e.g., 'Smart Watch', 'Weekend Getaway')" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="wishDescription"><i class="fas fa-edit"></i> Description</label>
+                    <textarea id="wishDescription" rows="3" placeholder="Tell us more about this wish..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="wishPrice"><i class="fas fa-money-bill-wave"></i> Estimated Price</label>
+                        <input type="text" id="wishPrice" placeholder="e.g., $200 or Flexible">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-exclamation-circle"></i> Priority</label>
+                        <div class="priority-buttons">
+                            <button type="button" class="priority-btn" data-priority="low">Low</button>
+                            <button type="button" class="priority-btn active" data-priority="medium">Medium</button>
+                            <button type="button" class="priority-btn" data-priority="high">High</button>
+                        </div>
+                        <input type="hidden" id="wishPriority" value="medium">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="wishAddedBy"><i class="fas fa-user"></i> Added By</label>
+                    <select id="wishAddedBy" required>
+                        <option value="mercy">Mercy</option>
+                        <option value="methuselah">Methuselah</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="add-btn">
+                    <i class="fas fa-plus"></i> Add to Our Wishlist
+                </button>
+            </form>
+        </section>
+
+        <!-- Wishlist Filters -->
+        <div class="wishlist-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Wishes</button>
+                <button class="filter-tab" data-filter="mercy">Mercy's Wishes</button>
+                <button class="filter-tab" data-filter="methuselah">Methuselah's Wishes</button>
+                <button class="filter-tab" data-filter="high">High Priority</button>
+                <button class="filter-tab" data-filter="low">Low Priority</button>
+                <button class="filter-tab" data-filter="fulfilled">Fulfilled</button>
+            </div>
+
+            <!-- Wishlist Grid -->
+            <div class="wishlist-grid" id="wishlistGrid">
+                <!-- Wishes will be loaded here -->
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-gifts"></i>
+                    <h3>Our Wishlist is Empty</h3>
+                    <p>Be the first to add a wish! What would you love to have?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Love Quote -->
+        <div class="love-quote">
+            <p>"The best gift I could ever receive is more time with you. Every wish we share brings us closer."</p>
+            <p class="signature">- For My Beautiful Mercy</p>
+        </div>
+
+        <!-- Back Home -->
+        <section class="back-home">
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </section>
+    </main>
+
+    <!-- Email Modal -->
+    <div class="email-modal" id="emailModal">
+        <div class="email-modal-content">
+            <h3><i class="fas fa-envelope"></i> Email Wishlist to Mercy</h3>
+            <input type="email" id="emailInput" class="email-input" placeholder="Enter Mercy's email address" value="mettmwamba@gmail.com">
+            <div class="email-buttons">
+                <button class="email-btn email-send" onclick="emailWishlist()">
+                    <i class="fas fa-paper-plane"></i> Send Email
+                </button>
+                <button class="email-btn email-cancel" onclick="hideEmailModal()">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sync Notification -->
+    <div class="sync-notification" id="syncNotification">
+        <i class="fas fa-sync"></i>
+        <span id="syncMessage">Wishlist saved successfully!</span>
+    </div>
+
+    <!-- Floating hearts background -->
+    <div class="floating-hearts-bg"></div>
+
+    <script>
+    // Wishlist Data Management
+    let wishes = [];
+    let currentFilter = 'all';
+    let currentPriority = 'medium';
+    let emptyStateElement = null;
+
+    // Initialize wishlist
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Wishlist loading...');
+        
+        // Get empty state element once
+        emptyStateElement = document.getElementById('emptyState');
+        
+        // Initialize
+        loadWishlist();
+        initForm();
+        initFilters();
+        initMobileMenu();
+        
+        // Hide preloader after 2 seconds
+        setTimeout(() => {
+            document.getElementById('preloader').classList.add('hidden');
+        }, 2000);
+        
+        // Check for shared data in URL
+        checkForSharedData();
+    });
+
+    // Load wishlist from localStorage
+    function loadWishlist() {
+        const savedWishes = localStorage.getItem('ourWishlist');
+        if (savedWishes) {
+            wishes = JSON.parse(savedWishes);
+            console.log(`Loaded ${wishes.length} wishes from storage`);
+        } else {
+            // Add some sample wishes if empty
+            wishes = [
+                {
+                    id: 1,
+                    title: 'Weekend Getaway',
+                    description: 'A romantic weekend at a beach resort',
+                    price: '$500',
+                    priority: 'high',
+                    addedBy: 'methuselah',
+                    date: new Date().toISOString(),
+                    fulfilled: false
+                },
+                {
+                    id: 2,
+                    title: 'Smart Watch',
+                    description: 'To track fitness and health metrics',
+                    price: '$300',
+                    priority: 'medium',
+                    addedBy: 'mercy',
+                    date: new Date().toISOString(),
+                    fulfilled: false
+                },
+                {
+                    id: 3,
+                    title: 'Photo Album',
+                    description: 'Printed album of our favorite memories',
+                    price: '$50',
+                    priority: 'low',
+                    addedBy: 'methuselah',
+                    date: new Date().toISOString(),
+                    fulfilled: false
+                }
+            ];
+            saveWishlist();
+        }
+        
+        updateStats();
+        renderWishlist();
+    }
+
+    // Save wishlist to localStorage
+    function saveWishlist() {
+        localStorage.setItem('ourWishlist', JSON.stringify(wishes));
+        console.log(`Saved ${wishes.length} wishes to storage`);
+        showSyncNotification('Wishlist saved successfully!');
+    }
+
+    // Initialize form
+    function initForm() {
+        const form = document.getElementById('wishForm');
+        const priorityButtons = document.querySelectorAll('.priority-btn');
+        
+        // Priority buttons
+        priorityButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                priorityButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentPriority = this.dataset.priority;
+                document.getElementById('wishPriority').value = currentPriority;
+            });
+        });
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('wishTitle').value.trim();
+            const description = document.getElementById('wishDescription').value.trim();
+            const price = document.getElementById('wishPrice').value.trim() || 'Flexible';
+            const addedBy = document.getElementById('wishAddedBy').value;
+            const priority = document.getElementById('wishPriority').value;
+            
+            if (!title) {
+                alert('Please enter a wish title!');
+                return;
+            }
+            
+            // Create new wish
+            const newWish = {
+                id: Date.now(), // Unique ID
+                title: title,
+                description: description,
+                price: price,
+                priority: priority,
+                addedBy: addedBy,
+                date: new Date().toISOString(),
+                fulfilled: false
+            };
+            
+            // Add to wishlist
+            wishes.unshift(newWish); // Add to beginning
+            saveWishlist();
+            updateStats();
+            renderWishlist();
+            
+            // Reset form
+            form.reset();
+            document.getElementById('wishPriority').value = 'medium';
+            priorityButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.priority === 'medium') {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Celebration
+            createHearts(5);
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 50,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+            
+            // Focus back on title input
+            document.getElementById('wishTitle').focus();
+        });
+    }
+
+    // Initialize filters
+    function initFilters() {
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderWishlist();
+            });
+        });
+    }
+
+    // Render wishlist - FIXED VERSION
+    function renderWishlist() {
+        const grid = document.getElementById('wishlistGrid');
+        
+        // Clear grid but preserve empty state element
+        while (grid.firstChild && grid.firstChild.id !== 'emptyState') {
+            grid.removeChild(grid.firstChild);
+        }
+        
+        // If empty state doesn't exist in grid, add it
+        if (!grid.contains(emptyStateElement)) {
+            grid.appendChild(emptyStateElement);
+        }
+        
+        // Filter wishes
+        let filteredWishes = [...wishes];
+        
+        switch (currentFilter) {
+            case 'mercy':
+                filteredWishes = wishes.filter(w => w.addedBy === 'mercy');
+                break;
+            case 'methuselah':
+                filteredWishes = wishes.filter(w => w.addedBy === 'methuselah');
+                break;
+            case 'high':
+                filteredWishes = wishes.filter(w => w.priority === 'high');
+                break;
+            case 'low':
+                filteredWishes = wishes.filter(w => w.priority === 'low');
+                break;
+            case 'fulfilled':
+                filteredWishes = wishes.filter(w => w.fulfilled);
+                break;
+        }
+        
+        // Show empty state if no wishes
+        if (filteredWishes.length === 0) {
+            emptyStateElement.style.display = 'block';
+            return;
+        }
+        
+        // Hide empty state
+        emptyStateElement.style.display = 'none';
+        
+        // Create wish cards
+        filteredWishes.forEach(wish => {
+            const card = createWishCard(wish);
+            grid.insertBefore(card, emptyStateElement);
+        });
+    }
+
+    // Create wish card element
+    function createWishCard(wish) {
+        const card = document.createElement('div');
+        card.className = 'wish-card';
+        card.dataset.id = wish.id;
+        
+        // Format date
+        const date = new Date(wish.date);
+        const dateStr = date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+        
+        // Priority class
+        const priorityClass = `priority-${wish.priority}`;
+        const priorityText = wish.priority.charAt(0).toUpperCase() + wish.priority.slice(1);
+        
+        // Added by class
+        const addedByClass = wish.addedBy;
+        const addedByName = wish.addedBy === 'mercy' ? 'Mercy' : 'Methuselah';
+        const addedByIcon = wish.addedBy === 'mercy' ? 'fas fa-heart' : 'fas fa-star';
+        
+        card.innerHTML = `
+            <div class="wish-header">
+                <h3 class="wish-title">${wish.title}</h3>
+                <span class="priority-tag ${priorityClass}">${priorityText}</span>
+            </div>
+            
+            ${wish.description ? `<p class="wish-description">${wish.description}</p>` : ''}
+            
+            <div class="wish-footer">
+                <div class="wish-meta">
+                    <span class="price-tag">${wish.price}</span>
+                    <span class="added-by ${addedByClass}">
+                        <i class="${addedByIcon}"></i> ${addedByName}
+                    </span>
+                    <span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+                        <i class="fas fa-calendar"></i> ${dateStr}
+                    </span>
+                </div>
+                
+                <div class="wish-actions">
+                    ${wish.fulfilled ? 
+                        `<button class="action-btn" onclick="toggleFulfill(${wish.id})" title="Mark as unfulfilled">
+                            <i class="fas fa-check-circle" style="color: #00ff00;"></i>
+                        </button>` :
+                        `<button class="action-btn" onclick="toggleFulfill(${wish.id})" title="Mark as fulfilled">
+                            <i class="far fa-check-circle"></i>
+                        </button>`
+                    }
+                    <button class="action-btn" onclick="deleteWish(${wish.id})" title="Delete wish">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Add fulfilled style
+        if (wish.fulfilled) {
+            card.style.opacity = '0.7';
+            card.style.border = '1px solid rgba(0, 255, 0, 0.3)';
+            card.querySelector('.wish-title').innerHTML = `${wish.title} <i class="fas fa-check" style="color: #00ff00; margin-left: 5px;"></i>`;
+        }
+        
+        return card;
+    }
+
+    // Update statistics
+    function updateStats() {
+        const totalWishes = wishes.length;
+        const mercyWishes = wishes.filter(w => w.addedBy === 'mercy').length;
+        const methuselahWishes = wishes.filter(w => w.addedBy === 'methuselah').length;
+        
+        document.getElementById('totalWishes').textContent = totalWishes;
+        document.getElementById('mercyWishes').textContent = mercyWishes;
+        document.getElementById('methuselahWishes').textContent = methuselahWishes;
+    }
+
+    // Toggle fulfill status
+    function toggleFulfill(id) {
+        const wishIndex = wishes.findIndex(w => w.id === id);
+        if (wishIndex !== -1) {
+            wishes[wishIndex].fulfilled = !wishes[wishIndex].fulfilled;
+            saveWishlist();
+            renderWishlist();
+            
+            // Celebration if fulfilled
+            if (wishes[wishIndex].fulfilled) {
+                createHearts(10);
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                }
+                showSyncNotification(`🎉 "${wishes[wishIndex].title}" marked as fulfilled!`);
+            }
+        }
+    }
+
+    // Delete wish - FIXED VERSION
+    function deleteWish(id) {
+        if (confirm('Are you sure you want to delete this wish?')) {
+            const wishIndex = wishes.findIndex(w => w.id === id);
+            if (wishIndex !== -1) {
+                const wishTitle = wishes[wishIndex].title;
+                wishes.splice(wishIndex, 1);
+                saveWishlist();
+                updateStats();
+                renderWishlist();
+                
+                // Create floating heart
+                createHearts(3);
+                
+                showSyncNotification(`"${wishTitle}" has been deleted.`);
+            }
+        }
+    }
+
+    // Show sync notification
+    function showSyncNotification(message = 'Wishlist saved successfully!') {
+        const notification = document.getElementById('syncNotification');
+        const messageEl = document.getElementById('syncMessage');
+        
+        messageEl.textContent = message;
+        notification.style.display = 'flex';
+        
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000);
+    }
+
+    // Export wishlist
+    function exportWishlist() {
+        // Format the data nicely
+        const exportData = {
+            timestamp: new Date().toISOString(),
+            totalWishes: wishes.length,
+            wishes: wishes
+        };
+        
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        
+        // Create download link
+        const downloadLink = document.createElement('a');
+        const url = URL.createObjectURL(dataBlob);
+        downloadLink.href = url;
+        downloadLink.download = `Our-Wishlist-${new Date().toISOString().split('T')[0]}.json`;
+        
+        // Trigger download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        URL.revokeObjectURL(url);
+        
+        showSyncNotification('Wishlist exported successfully!');
+        
+        // Also show the data for copy-paste
+        setTimeout(() => {
+            const shouldCopy = confirm('Export successful! Would you like to copy the data to clipboard to share via WhatsApp/Message?');
+            if (shouldCopy) {
+                navigator.clipboard.writeText(dataStr).then(() => {
+                    alert('Wishlist data copied to clipboard! 📋\n\nYou can now paste it in a message to share.');
+                });
+            }
+        }, 500);
+    }
+
+    // Import wishlist
+    function importWishlist() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json,.txt';
+        
+        input.onchange = function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    // Handle different import formats
+                    let importedWishes = [];
+                    if (Array.isArray(importedData)) {
+                        // Direct array of wishes
+                        importedWishes = importedData;
+                    } else if (importedData.wishes && Array.isArray(importedData.wishes)) {
+                        // Our export format
+                        importedWishes = importedData.wishes;
+                    } else {
+                        throw new Error('Invalid wishlist format');
+                    }
+                    
+                    if (importedWishes.length === 0) {
+                        alert('The imported file contains no wishes.');
+                        return;
+                    }
+                    
+                    const shouldReplace = confirm(`Found ${importedWishes.length} wishes. Replace current list or merge?`);
+                    
+                    if (shouldReplace) {
+                        // Replace current list
+                        wishes = importedWishes;
+                    } else {
+                        // Merge lists
+                        const existingIds = wishes.map(w => w.id);
+                        importedWishes.forEach(wish => {
+                            if (!existingIds.includes(wish.id)) {
+                                wishes.push(wish);
+                            }
+                        });
+                    }
+                    
+                    saveWishlist();
+                    updateStats();
+                    renderWishlist();
+                    
+                    showSyncNotification(`Successfully imported ${importedWishes.length} wishes! ✨`);
+                    
+                } catch (error) {
+                    alert('Error importing wishlist: ' + error.message + '\n\nPlease make sure you are importing a valid wishlist file.');
+                }
+            };
+            
+            reader.readAsText(file);
+        };
+        
+        input.click();
+    }
+
+    // Email wishlist
+    function showEmailModal() {
+        document.getElementById('emailModal').style.display = 'flex';
+        document.getElementById('emailInput').focus();
+    }
+    
+    function hideEmailModal() {
+        document.getElementById('emailModal').style.display = 'none';
+    }
+    
+    function emailWishlist() {
+        const email = document.getElementById('emailInput').value.trim();
+        if (!email || !email.includes('@')) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        
+        // Create email content
+        const date = new Date().toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        let emailBody = `Our Gift Wishlist - ${date}\n\n`;
+        emailBody += `Total Wishes: ${wishes.length}\n`;
+        emailBody += `Mercy's Wishes: ${wishes.filter(w => w.addedBy === 'mercy').length}\n`;
+        emailBody += `Methuselah's Wishes: ${wishes.filter(w => w.addedBy === 'methuselah').length}\n\n`;
+        
+        emailBody += "📋 OUR WISHLIST:\n";
+        emailBody += "=".repeat(50) + "\n\n";
+        
+        wishes.forEach((wish, index) => {
+            const fulfilled = wish.fulfilled ? '✅ ' : '';
+            const addedBy = wish.addedBy === 'mercy' ? 'Mercy' : 'Methuselah';
+            emailBody += `${index + 1}. ${fulfilled}${wish.title}\n`;
+            emailBody += `   💰 ${wish.price} | ⚡ ${wish.priority.toUpperCase()} | 👤 ${addedBy}\n`;
+            if (wish.description) {
+                emailBody += `   📝 ${wish.description}\n`;
+            }
+            emailBody += "\n";
+        });
+        
+        emailBody += "\n💝 Love always,\n";
+        emailBody += "Methuselah\n\n";
+        emailBody += "P.S. You can import this list by copying the JSON data from the website!";
+        
+        // Create mailto link
+        const subject = `Our Gift Wishlist - ${date}`;
+        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+        
+        // Open email client
+        window.location.href = mailtoLink;
+        
+        hideEmailModal();
+        showSyncNotification('Opening email client... 📧');
+    }
+
+    // Check for shared data in URL
+    function checkForSharedData() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sharedData = urlParams.get('wishlist');
+        
+        if (sharedData) {
+            try {
+                const decodedData = atob(sharedData);
+                const sharedWishes = JSON.parse(decodedData);
+                
+                if (confirm('Found shared wishlist data! Would you like to import it?')) {
+                    wishes = sharedWishes;
+                    saveWishlist();
+                    updateStats();
+                    renderWishlist();
+                    showSyncNotification('Shared wishlist imported successfully!');
+                    
+                    // Clean URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            } catch (error) {
+                console.error('Error parsing shared data:', error);
+            }
+        }
+    }
+
+    // Create floating hearts
+    function createHearts(count) {
+        let container = document.querySelector('.floating-hearts-bg');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'floating-hearts-bg';
+            document.body.appendChild(container);
+        }
+        
+        for (let i = 0; i < count; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '❤️';
+            heart.style.cssText = `
+                position: fixed;
+                left: ${Math.random() * 100}vw;
+                top: ${100 + Math.random() * 20}vh;
+                font-size: ${15 + Math.random() * 25}px;
+                opacity: 0;
+                animation: floatUp ${3 + Math.random() * 7}s linear forwards;
+                animation-delay: ${Math.random() * 2}s;
+                z-index: 9998;
+            `;
+            
+            container.appendChild(heart);
+            
+            setTimeout(() => {
+                if (heart.parentNode === container) {
+                    container.removeChild(heart);
+                }
+            }, 10000);
+        }
+    }
+
+    function initMobileMenu() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        }
+    }
+
+    // Create initial hearts
+    setTimeout(() => {
+        createHearts(5);
+    }, 1000);
+    
+    // Keep creating hearts
+    setInterval(() => {
+        createHearts(1);
+    }, 5000);
+</script>
